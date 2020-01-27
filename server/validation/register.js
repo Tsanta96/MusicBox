@@ -5,6 +5,7 @@ module.exports = function validateRegisterInput(data) {
     data.name = validText(data.name) ? data.name : "";
     data.email = validText(data.email) ? data.email : "";
     data.password = validText(data.password) ? data.password : "";
+    // data.password2 = validText(data.password2) ? data.password2 : "";
 
     if (Validator.isEmpty(data.name)) {
         return { message: "Name cannot be blank", isValid: false}

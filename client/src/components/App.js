@@ -10,7 +10,6 @@ import Nav from '../components/Nav';
 const App = () => {
   return (
     <div>
-      <h1>MusicBox</h1>
       <Route exact path="/" component={Nav}/>
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
