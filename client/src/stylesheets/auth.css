@@ -1,0 +1,197 @@
+@font-face {
+    src: url(../assets/fonts/OfficinaSansStd-Bold.otf);
+    font-family: amazon-font;
+}
+
+.auth-logo {
+    letter-spacing: -1px;
+    width: 120px;
+    padding-top: 8px;
+    margin: 0 auto;
+    font-family: amazon-font;
+    font-size: 30px;
+    border-bottom: 2px solid orange;
+}
+
+.form-container {
+    display: flex;
+    background-color: white;
+    width: 312px;
+    height: 481px;
+    margin: 0 auto;
+    margin-top: 8px;
+    border-radius: 3px;
+    border: 1px solid #e3e3e3;
+}
+
+.auth-form {
+    /* background-color: rgb(170, 170, 170); */
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 95%;
+    /* margin: 0 auto;
+    margin-top: 10px; */
+    padding: 14px 18px;
+}
+
+.create-account {
+    font-size: 24px;
+    margin: 0px 0px 10px 0px;
+    padding: 0px 0px 4px 0px;
+    font-family: "Amazon Ember", Arial, sans-serif
+    /* font-family: amazon-font; */
+}
+
+.input-field-names {
+    font-family: amazon-font;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0px 0px 2px 2px;
+}
+
+.auth-form input {
+    height: 20px;
+    width: 93%;
+    padding: 3px 7px;
+    margin-bottom: 9px;
+    border-radius: 3px;
+    border-style: none;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .5),0 1px 0 rgba(0, 0, 0, .07) inset;
+    outline: 0;
+}
+
+.auth-form input:focus {
+    height: 20px;
+    width: 93%;
+    padding: 3px 7px;
+    margin-bottom: 9px;
+    border-radius: 3px;
+    border-style: none;
+    border: 1px solid #e77600;
+    box-shadow: 0 0 3px 2px rgba(228, 121, 17, .5);
+    outline: 0;
+}
+
+.password-note {
+    margin-left: 5px;
+    margin-top: 0px;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    font-size: 10px;
+    font-weight: 1000;
+}
+
+.password-subtext {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+}
+
+.auth-submit {
+    height: 26px;
+    width: 98%;
+    padding: 3px 7px;
+    margin-left: 1px;
+    border-radius: 3px;
+    background-image: linear-gradient(#f6d994,#e6b949);
+    border: 1px solid black;
+    font-family: "Amazon Ember", Arial, sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.music-box-terms {
+    margin-top: 15px;
+    padding-bottom: 30px;
+    font-size: 10px;
+    border-bottom: 2px solid black;
+    border-image: linear-gradient(to right, white, lightgray, white);
+    border-image-slice: 1;
+}
+
+.redirect {
+    margin-top: 30px;
+    font-size: 12px;
+    font-family: "Amazon Ember", Arial, sans-serif;
+    font-weight: 500;
+}
+
+.sign-in-link {
+    text-decoration: none;
+    color: #1d76c6;
+    font-size: 12px;
+}
+
+/* Specified for login */
+
+.entire-login-container {
+    width: 312px;
+    margin: 0 auto;
+}
+
+.login-form-container {
+    display: flex;
+    background-color: white;
+    width: 312px;
+    height: 260px;
+    margin: 0 auto;
+    margin-top: 8px;
+    border-radius: 3px;
+    border: 1px solid #e3e3e3;
+}
+
+#sign-in-email {
+    background-color: #e7effe;
+}
+
+.login-music-box-terms {
+    margin-top: 15px;
+    font-size: 10px;
+}
+
+.new-to-musicbox {
+    border-top: lightgray;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    top: 2px;
+    padding-top: 1px;
+    margin-bottom: 4px;
+    line-height: 0;
+}
+
+.new-to-musicbox:after {
+    content: "";
+    width: 100%;
+    background-color: transparent;
+    display: block;
+    height: 1px;
+    border-top: 1px solid #e7e7e7;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+}
+
+.new-to-musicbox-text {
+    line-height: 1;
+    font-size: 12px;
+    color: #767676;
+    font-weight: 400;
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    padding: 0 8px 0 7px;
+}
+
+.create-your-account-btn {
+    width: 100%;
+    height: 28px;
+    border-radius: 3px;
+    background-image: linear-gradient(#f6f7f9,#e8e9ec);
+    font-family: "Amazon Ember", Arial, sans-serif;
+    border: 1px solid black;
+    cursor: pointer;
+}
