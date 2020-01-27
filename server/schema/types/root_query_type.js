@@ -28,8 +28,7 @@ const RootQueryType = new GraphQLObjectType({
     products: {
         type: new GraphQLList(ProductType),
         resolve(){
-            debugger;
-            return Product.find({})
+          return Product.find({})
         }
     },
     product: {
