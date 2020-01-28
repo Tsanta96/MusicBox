@@ -23,7 +23,6 @@ class Register extends Component {
     }
 
     updateCache(client, {data}) {
-        console.log("Register.js updateCache()", data);
         client.writeData({
             data: { isLoggedIn: data.register.loggedIn }
         });
@@ -57,7 +56,6 @@ class Register extends Component {
                 this.props.history.push("/");
             }}
             onError={({ graphQLErrors }) => {
-                // this.state.errors = JSON.parse(graphQLErrors[0].message.split(","))
                 this.setState({errors: Object.values(JSON.parse(graphQLErrors[0].message.split(",")))})
                 this.renderErrors(this.state.errors);
             }}
@@ -73,14 +71,15 @@ class Register extends Component {
                     <form className="auth-form"
                     onSubmit={e => {
                         e.preventDefault();
-                        registerUser({
-                            variables: {
-                                name: this.state.name,
-                                email: this.state.email,
-                                password: this.state.password,
-                                password2: this.state.password2
-                            }
-                        });
+                            registerUser({
+                                variables: {
+                                    name: this.state.name,
+                                    email: this.state.email,
+                                    password: this.state.password,
+                                    password2: this.state.password2
+                                }
+                            });
+                        // }
                     }}
                     >
                         <p className="create-account">Create account</p>

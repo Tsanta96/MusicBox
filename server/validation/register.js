@@ -6,7 +6,7 @@ module.exports = function validateRegisterInput(data) {
     data.name = validText(data.name) ? data.name : "";
     data.email = validText(data.email) ? data.email : "";
     data.password = validText(data.password) ? data.password : "";
-    // data.password2 = validText(data.password2) ? data.password2 : "";
+    data.password2 = validText(data.password2) ? data.password2 : "";
 
     if (Validator.isEmpty(data.name)) {
       messages[0] = "Name cannot be blank";
@@ -22,6 +22,10 @@ module.exports = function validateRegisterInput(data) {
 
     if (!Validator.isLength(data.password, { min: 6, max: 16 })) {
         messages[3] = "Password must be between 8 and 16 characters";
+    }
+
+    if (data.password !== data.password2) {
+        messages[4] = "Passwords need to match";
     }
 
     if (Object.keys(messages).length > 0 ) {
