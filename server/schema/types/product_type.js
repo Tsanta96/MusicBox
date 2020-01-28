@@ -9,15 +9,26 @@ const ProductType = new GraphQLObjectType({
     name: { type: GraphQLString },
     category: { 
         type: require("./category_type"),
-        resolver(parentValue){(
-            Product.findById(parentValue._id)
+        resolver(parentValue){
+            console.log("product_type.js hit it?");
+            return Product.findById(parentValue._id)
                 .populate("category")
                 .then(product => (product.category))
+        }
+    },
+    seller: {
+        type: require("./user_type"),
+        resolver(parentValue){(
+          Product.findById(parentValue._id)
+              .populate("user")
+              .then(product => (product.seller))
         )}
     },
     description: { type: GraphQLString },
+    inventoryAmount: { type: GraphQLInt},
+    price: { type: GraphQLFloat },
     weight: { type: GraphQLInt },
-    price: { type: GraphQLFloat }
+    productImageUrl: { type: GraphQLString }
   })
 });
 

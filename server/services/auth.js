@@ -75,7 +75,7 @@ const login = async data => {
       if (!isValidPassword) throw new Error("Invalid password");
   
       const token = jwt.sign({ id: user.id }, keys.secretOrKey);
-  
+
       return { token, loggedIn: true, ...user._doc, password: null };
     } catch (err) {
       throw err.message;

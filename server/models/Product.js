@@ -26,21 +26,22 @@ const ProductSchema = new Schema({
     type: Number,
   },
   price: {
-      type: Number,
-      required: true
+    type: Number,
+    required: true
   },
   weight: {
     type: Number,
     required: false
   },
-  reviews: 
-      [
+  reviews: [
           {
               type: Schema.Types.ObjectId,
               ref: "review"
           }
-      ]
-  
+  ],
+  productImageUrl: {
+    type: String,
+  }
 });
 
 ProductSchema.statics.updateProductCategory = (productId, categoryId) => {

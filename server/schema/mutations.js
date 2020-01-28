@@ -35,13 +35,18 @@ const mutation = new GraphQLObjectType({
             type: ProductType,
             args: {
                 name: { type: GraphQLString },
+                category: { type: GraphQLString },
                 description: { type: GraphQLString },
+                seller: { type: GraphQLID },
                 weight: { type: GraphQLInt },
-                price: { type: GraphQLFloat }
+                price: { type: GraphQLFloat },
+
             },
-            resolve(_, { name, description, weight, price }) {(
-                new Product({ name, description, weight, price }).save()
-            )}
+            resolve(_, { name, category, description, weight, price }) {
+                console.log("hit this?");
+                return new Product({ name, category, description, weight, price })  //.save()
+                // return "HAYYYAAA"
+            }
         },
         newCart: {
             type: CartType,
