@@ -14,9 +14,16 @@ const ProductSchema = new Schema({
     type: String,
     required: true
   },
+  seller: {
+    type: Schema.Types.ObjectId,
+    ref: "user"
+  },
   description: {
     type: String,
     required: true
+  },
+  inventoryAmount: {
+    type: Number,
   },
   price: {
       type: Number,
