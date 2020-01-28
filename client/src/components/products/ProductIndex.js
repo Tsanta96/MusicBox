@@ -24,13 +24,11 @@ export default class ProductIndex extends React.Component {
     }
 
     render(){
-        debugger;
         return (
         <Query query={FETCH_PRODUCTS}>
             {({ loading, error, data }) => {
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
-            console.log(data);
     
             return (
                 <ul>

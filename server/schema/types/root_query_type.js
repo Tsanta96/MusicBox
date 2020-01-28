@@ -8,6 +8,8 @@ const CategoryType = require("./category_type");
 const User = mongoose.model("user");
 const Product = mongoose.model("product");
 const Category = mongoose.model("category");
+const Cart = mongoose.model("cart");
+const CartType = require("./cart_type");
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -50,6 +52,12 @@ const RootQueryType = new GraphQLObjectType({
         resolve(_, args) {
             return Category.findById(args._id)
         }
+    },
+    carts: {
+      type: new GraphQLList(CartType),
+      resolve(){
+        return Cart.find({}).populate("user")
+      }
     }
    })
 });

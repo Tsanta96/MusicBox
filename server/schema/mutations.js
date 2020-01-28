@@ -43,6 +43,16 @@ const mutation = new GraphQLObjectType({
                 new Product({ name, description, weight, price }).save()
             )}
         },
+        newCart: {
+            type: CartType,
+            args: {
+                userId: { type: GraphQLID }
+            },
+            resolve(_, { userId }) {
+                return new Cart({ user: userId }).populate("user").save();
+                //return Cart.find({user: userId}).populate("user").then(cart => cart)
+            }
+        },
         deleteProduct: {
             type: ProductType,
             args: {
@@ -80,7 +90,10 @@ const mutation = new GraphQLObjectType({
               password: { type: GraphQLString }
             },
             resolve(_, args) {
-              return AuthService.register(args);
+              return AuthService.register(args).then(user => {
+                  new Cart({ user: user }).save()
+                  return user;
+              });
             }
         },
         logout: {
