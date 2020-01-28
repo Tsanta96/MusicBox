@@ -91,7 +91,11 @@ const mutation = new GraphQLObjectType({
                 password: { type: GraphQLString }
             },
             resolve(_, args) {
-                return AuthService.login(args);
+                return AuthService.login(args).then((success) => {
+                    return success;
+                }).catch((failure) => {
+                    throw new Error(JSON.stringify(failure));
+                })
             }
         },
         verifyUser: {

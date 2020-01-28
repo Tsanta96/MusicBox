@@ -16,8 +16,6 @@ class Register extends Component {
             errors: "",
             refresh: 1
         };
-        
-        // this.renderErrors = this.renderErrors.bind(this);
     }
 
     update(field) {
@@ -54,8 +52,6 @@ class Register extends Component {
         <Mutation
             mutation={REGISTER_USER}
             onCompleted={data => {
-                console.log("mutation success");
-                console.log("Register.js register data --->", data);
                 const { token } = data.register;
                 localStorage.setItem("auth-token", token);
                 this.props.history.push("/");

@@ -12,7 +12,6 @@ const register = async data => {
   
       if (!isValid) {
         throw new Error(JSON.stringify(message));
-        // return message;
       }
       const { name, email, password } = data;
   
@@ -64,7 +63,7 @@ const login = async data => {
       const { message, isValid } = validateLoginInput(data);
   
       if (!isValid) {
-        throw new Error(message);
+        throw new Error(JSON.stringify(message));
       }
   
       const { email, password } = data;
@@ -79,7 +78,7 @@ const login = async data => {
   
       return { token, loggedIn: true, ...user._doc, password: null };
     } catch (err) {
-      throw err;
+      throw err.message;
     }
 };
 
