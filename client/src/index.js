@@ -50,7 +50,7 @@ if (token) {
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
-          cart: []
+          currentUser: data.verifyUser._id
         }
       });
     });

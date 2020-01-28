@@ -5,6 +5,7 @@ export const LOGIN_USER = gql `
     login(email: $email, password: $password) {
       token
       loggedIn
+      _id
     }
   }
 `;
@@ -12,7 +13,8 @@ export const LOGIN_USER = gql `
 export const VERIFY_USER = gql `
   mutation VerifyUser($token: String!) {
     verifyUser(token: $token) {
-      loggedIn
+      loggedIn,
+      _id
     }
   }
 `;
@@ -30,10 +32,13 @@ export const REGISTER_USER = gql `
 export const ADD_TO_CART = gql `
   mutation AddToCart($productId: ID!, $cartId: ID!) {
     addToCart(productId: $productId, cartId: $cartId) {
-      cart {
+      _id
+      user {
         _id
-        user
-        products
+        name
+      }
+      products {
+        name
       }
     }
   }

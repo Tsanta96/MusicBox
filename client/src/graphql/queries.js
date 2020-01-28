@@ -18,3 +18,21 @@ export const IS_LOGGED_IN = gql `
         isLoggedIn @client
     }
 `;
+
+export const FIND_USER_CART = gql `
+    query findUserCart($userId: ID!) {
+      cart(userId: $userId) {
+        _id
+        user {
+          _id
+          name
+        }
+      }
+    }
+`;
+
+export const FETCH_USER = gql `
+    query fetchUser {
+      currentUser @client
+    }
+`;

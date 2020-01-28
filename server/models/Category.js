@@ -15,7 +15,10 @@ const CategorySchema = new Schema({
 CategorySchema.statics.findProducts = function(categoryId) {(
     this.findById(categoryId)
         .populate("products")
-        .then(category => category.products)
+        .then(category => {
+            console.log('category', category);
+            category.products
+        })
 )}
 
 module.exports = mongoose.model("category", CategorySchema);
