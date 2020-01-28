@@ -124,8 +124,21 @@
     font-size: 12px;
 }
 
-/* Specified for login */
+/* Errors box ----------------------------------------------------------------*/
+.errors-box {
+    color: #c40000;
+    padding: 4px 20px;
+    border: 1px solid #c40000;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px #fcf4f4 inset;
+    width: 180px;
+    margin: 12px auto;
+    font-family: "Amazon Ember", Arial, sans-serif;
+    font-size: 11px;
+}
 
+
+/* Specified for login -------------------------------------------------------*/
 .entire-login-container {
     width: 312px;
     margin: 0 auto;

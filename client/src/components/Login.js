@@ -9,7 +9,8 @@ class Login extends Component {
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            errors: ""
         };
     }
 
@@ -24,21 +25,46 @@ class Login extends Component {
             data: { isLoggedIn: data.login.loggedIn }
         });
     }
+
+    renderErrors(errors) {
+        if (errors === "") {
+            return (
+                <div></div>
+            )
+        } else {
+            return (
+                <ul className="errors-box">
+                    {errors.map((err, idx) => (
+                        <li key={idx}>
+                            {err}
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
+    }
     
     render() {
         return (
         <Mutation
             mutation={LOGIN_USER}
             onCompleted={data => {
-            const { token } = data.login;
-            localStorage.setItem("auth-token", token);
-            this.props.history.push("/");
+                const { token } = data.login;
+                localStorage.setItem("auth-token", token);
+                this.props.history.push("/");
+            }}
+            onError={({ graphQLErrors }) => {
+                this.setState({errors: Object.values(JSON.parse(graphQLErrors[0].message.split(",")))})
+                this.renderErrors(this.state.errors);
             }}
             update={(client, data) => this.updateCache(client, data)}
         >
             {loginUser => (
             <div>
                 <h1 className="auth-logo">musicbox</h1>
+                <div>
+                    {this.renderErrors(this.state.errors)}
+                </div>
                 <div className="entire-login-container">
                     <div className = "login-form-container">
                         <form className="auth-form"

@@ -12,7 +12,9 @@ class Register extends Component {
             name: "",
             email: "",
             password: "",
-            password2: ""
+            password2: "",
+            errors: "",
+            refresh: 1
         };
     }
 
@@ -24,6 +26,24 @@ class Register extends Component {
         client.writeData({
             data: { isLoggedIn: data.register.loggedIn }
         });
+    }
+
+    renderErrors(errors) {
+        if (errors === "") {
+            return (
+                <div></div>
+            )
+        } else {
+            return (
+                <ul className="errors-box">
+                    {errors.map((err, idx) => (
+                        <li key={idx}>
+                            {err}
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
     }
     
     render() {
@@ -50,11 +70,18 @@ class Register extends Component {
                         //     })
                         this.props.history.push("/");
                     }}
+                    onError={({ graphQLErrors }) => {
+                        this.setState({errors: Object.values(JSON.parse(graphQLErrors[0].message.split(",")))})
+                        this.renderErrors(this.state.errors);
+                    }}
                     update={(client, data) => this.updateCache(client, data)}
                 >
                     {registerUser => (
                     <div>
                         <h1 className="auth-logo">musicbox</h1>
+                        <div>
+                            {this.renderErrors(this.state.errors)}
+                        </div>
                         <div className="form-container">
                             <form className="auth-form"
                             onSubmit={e => {
