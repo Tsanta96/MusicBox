@@ -1,11 +1,13 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID, GraphQLFloat } = graphql;
 const mongoose = require("mongoose");
 const CategoryType = require("./types/category_type");
 const Category = mongoose.model("category");
 const ProductType = require("./types/product_type");
 const Product = mongoose.model("product");
 const UserType = require("./types/user_type");
+const CartType = require("./types/cart_type");
+const Cart = mongoose.model("cart");
 const AuthService = require("../services/auth");
 
 const mutation = new GraphQLObjectType({
@@ -34,11 +36,22 @@ const mutation = new GraphQLObjectType({
             args: {
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
-                weight: { type: GraphQLInt }
+                weight: { type: GraphQLInt },
+                price: { type: GraphQLFloat }
             },
-            resolve(_, { name, description, weight }) {(
-                new Product({ name, description, weight }).save()
+            resolve(_, { name, description, weight, price }) {(
+                new Product({ name, description, weight, price }).save()
             )}
+        },
+        newCart: {
+            type: CartType,
+            args: {
+                userId: { type: GraphQLID }
+            },
+            resolve(_, { userId }) {
+                return new Cart({ user: userId }).populate("user").save();
+                //return Cart.find({user: userId}).populate("user").then(cart => cart)
+            }
         },
         deleteProduct: {
             type: ProductType,
@@ -59,15 +72,31 @@ const mutation = new GraphQLObjectType({
                 return Product.updateProductCategory(productId, categoryId)
             }
         },
+        addToCart: {
+            type: CartType,
+            args: {
+                productId: { type: GraphQLID },
+                cartId: { type: GraphQLID }
+            },
+            resolve(_, { productId, cartId }) {
+                return Cart.addToCart(productId, cartId)
+            }
+        },
         register: {
             type: UserType,
             args: {
               name: { type: GraphQLString },
               email: { type: GraphQLString },
-              password: { type: GraphQLString }
+              password: { type: GraphQLString },
+              password2: { type: GraphQLString }
             },
-            resolve(_, args) {
-              return AuthService.register(args);
+            resolve(_, args) { 
+                return AuthService.register(args).then((user) => {
+                    new Cart({ user: user }).save()
+                    return user;
+                }).catch((failure) => {
+                    throw new Error(JSON.stringify(failure));
+                })
             }
         },
         logout: {
@@ -87,7 +116,11 @@ const mutation = new GraphQLObjectType({
                 password: { type: GraphQLString }
             },
             resolve(_, args) {
-                return AuthService.login(args);
+                return AuthService.login(args).then((success) => {
+                    return success;
+                }).catch((failure) => {
+                    throw new Error(JSON.stringify(failure));
+                })
             }
         },
         verifyUser: {

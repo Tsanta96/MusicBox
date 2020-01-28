@@ -11,11 +11,8 @@ const register = async data => {
       const { message, isValid } = validateRegisterInput(data);
   
       if (!isValid) {
-        console.log("message", message);
-        throw new Error(message);
-        // return message;
+        throw new Error(JSON.stringify(message));
       }
-  
       const { name, email, password } = data;
   
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -39,7 +36,7 @@ const register = async data => {
       // then return our created token, set loggedIn to be true, null their password, and send the rest of the user
       return { token, loggedIn: true, ...user._doc, password: null };
     } catch (err) {
-      throw err;
+        throw err.message;
     }
   };
 
@@ -66,7 +63,7 @@ const login = async data => {
       const { message, isValid } = validateLoginInput(data);
   
       if (!isValid) {
-        throw new Error(message);
+        throw new Error(JSON.stringify(message));
       }
   
       const { email, password } = data;
@@ -81,7 +78,7 @@ const login = async data => {
   
       return { token, loggedIn: true, ...user._doc, password: null };
     } catch (err) {
-      throw err;
+      throw err.message;
     }
 };
 
