@@ -22,6 +22,7 @@ export const REGISTER_USER = gql `
     register(name: $name, email: $email, password: $password) {
       token
       loggedIn
+      errors
     }
   }
 `;

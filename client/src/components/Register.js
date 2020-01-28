@@ -12,8 +12,12 @@ class Register extends Component {
             name: "",
             email: "",
             password: "",
-            password2: ""
+            password2: "",
+            errors: "",
+            refresh: 1
         };
+        
+        // this.renderErrors = this.renderErrors.bind(this);
     }
 
     update(field) {
@@ -21,10 +25,28 @@ class Register extends Component {
     }
 
     updateCache(client, {data}) {
-        console.log(data);
+        console.log("Register.js updateCache()", data);
         client.writeData({
             data: { isLoggedIn: data.register.loggedIn }
         });
+    }
+
+    renderErrors(errors) {
+        if (errors === "") {
+            return (
+                <div></div>
+            )
+        } else {
+            return (
+                <ul className="errors-box">
+                    {errors.map((err, idx) => (
+                        <li key={idx}>
+                            {err}
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
     }
     
     render() {
@@ -32,15 +54,25 @@ class Register extends Component {
         <Mutation
             mutation={REGISTER_USER}
             onCompleted={data => {
+                console.log("mutation success");
+                console.log("Register.js register data --->", data);
                 const { token } = data.register;
                 localStorage.setItem("auth-token", token);
                 this.props.history.push("/");
+            }}
+            onError={({ graphQLErrors }) => {
+                // this.state.errors = JSON.parse(graphQLErrors[0].message.split(","))
+                this.setState({errors: Object.values(JSON.parse(graphQLErrors[0].message.split(",")))})
+                this.renderErrors(this.state.errors);
             }}
             update={(client, data) => this.updateCache(client, data)}
         >
             {registerUser => (
             <div>
                 <h1 className="auth-logo">musicbox</h1>
+                <div>
+                    {this.renderErrors(this.state.errors)}
+                </div>
                 <div className="form-container">
                     <form className="auth-form"
                     onSubmit={e => {
@@ -55,45 +87,45 @@ class Register extends Component {
                         });
                     }}
                     >
-                    <p className="create-account">Create account</p>
-                    <label className="input-field-names">Your name
-                        <br></br>
-                        <input
-                            value={this.state.name}
-                            onChange={this.update("name")}
-                        />
-                    </label>
-                    <label className="input-field-names"> Email
-                        <br></br>
-                        <input
-                            value={this.state.email}
-                            onChange={this.update("email")}
-                        />
-                    </label>
-                    <label className="input-field-names"> Password
-                        <br></br>
-                        <input
-                            value={this.state.password}
-                            onChange={this.update("password")}
-                            type="password"
-                            placeholder="At least 8 characters"
-                        />
-                        <div className="password-subtext">
-                            <i className="fa fa-info-circle"></i>
-                            <p className="password-note">Passwords must be at least 8 characters.</p>
-                        </div>
-                    </label>
-                    <label className="input-field-names"> Re-enter Password
-                        <br></br>
-                        <input
-                            value={this.state.password2}
-                            onChange={this.update("password2")}
-                            type="password"
-                        />
-                    </label>
-                    <button className="auth-submit" type="submit">Create your MusicBox account</button>
-                    <p className="music-box-terms">By creating an account, you agree to MusicBox's Conditions of Use and Privacy Notice.</p>
-                    <p className="redirect">Already have an account? <Link to="/login" className="sign-in-link">Sign-In</Link></p>
+                        <p className="create-account">Create account</p>
+                        <label className="input-field-names">Your name
+                            <br></br>
+                            <input
+                                value={this.state.name}
+                                onChange={this.update("name")}
+                            />
+                        </label>
+                        <label className="input-field-names"> Email
+                            <br></br>
+                            <input
+                                value={this.state.email}
+                                onChange={this.update("email")}
+                            />
+                        </label>
+                        <label className="input-field-names"> Password
+                            <br></br>
+                            <input
+                                value={this.state.password}
+                                onChange={this.update("password")}
+                                type="password"
+                                placeholder="At least 8 characters"
+                            />
+                            <div className="password-subtext">
+                                <i className="fa fa-info-circle"></i>
+                                <p className="password-note">Passwords must be at least 8 characters.</p>
+                            </div>
+                        </label>
+                        <label className="input-field-names"> Re-enter Password
+                            <br></br>
+                            <input
+                                value={this.state.password2}
+                                onChange={this.update("password2")}
+                                type="password"
+                            />
+                        </label>
+                        <button className="auth-submit" type="submit">Create your MusicBox account</button>
+                        <p className="music-box-terms">By creating an account, you agree to MusicBox's Conditions of Use and Privacy Notice.</p>
+                        <p className="redirect">Already have an account? <Link to="/login" className="sign-in-link">Sign-In</Link></p>
                     </form>
                 </div>
             </div>
