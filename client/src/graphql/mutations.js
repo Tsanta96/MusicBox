@@ -25,3 +25,27 @@ export const REGISTER_USER = gql `
     }
   }
 `;
+
+export const ADD_TO_CART = gql `
+  mutation AddToCart($productId: ID!, $cartId: ID!) {
+    addToCart(productId: $productId, cartId: $cartId) {
+      cart {
+        _id
+        user
+        products
+      }
+    }
+  }
+`;
+
+export const CREATE_CART = gql`
+  mutation CreateCart($userId: ID!) {
+    newCart(userId: $userId) {
+      _id
+      user {
+        _id
+        name
+      }
+    }
+  }
+`;
