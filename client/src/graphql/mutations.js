@@ -20,8 +20,33 @@ export const VERIFY_USER = gql `
 export const REGISTER_USER = gql `
   mutation RegisterUser($name: String!, $email: String!, $password: String!) {
     register(name: $name, email: $email, password: $password) {
+      _id
       token
       loggedIn
+    }
+  }
+`;
+
+export const ADD_TO_CART = gql `
+  mutation AddToCart($productId: ID!, $cartId: ID!) {
+    addToCart(productId: $productId, cartId: $cartId) {
+      cart {
+        _id
+        user
+        products
+      }
+    }
+  }
+`;
+
+export const CREATE_CART = gql`
+  mutation CreateCart($userId: ID!) {
+    newCart(userId: $userId) {
+      _id
+      user {
+        _id
+        name
+      }
     }
   }
 `;
