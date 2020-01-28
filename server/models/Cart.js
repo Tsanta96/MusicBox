@@ -20,11 +20,14 @@ CartSchema.statics.addToCart = (productId, cartId) => {
 
     return Cart.findById(cartId).then(cart => {
         return Product.findById(productId).then(product => {
+            console.log("cart: ", cart);
+            console.log("product: ", product);
             cart.products.push(product);
 
-            return Promise.all([cart.save()]).then(
-                ([cart]) => cart
-            );
+            // return Promise.all([cart.save()]).then(
+            //     ([cart]) => cart
+            // );
+            return cart.save().then(cart => cart);
         });
     });
 };

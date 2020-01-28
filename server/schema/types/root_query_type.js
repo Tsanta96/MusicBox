@@ -56,7 +56,14 @@ const RootQueryType = new GraphQLObjectType({
     carts: {
       type: new GraphQLList(CartType),
       resolve(){
-        return Cart.find({}).populate("user")
+        return Cart.find({}).populate("user").populate("products")
+      }
+    },
+    cart: {
+      type: CartType,
+      args: { userId: { type: new GraphQLNonNull(GraphQLID) }},
+      resolve(_, {userId}) {
+        return Cart.find({user: userId}).populate("products").then(carts => carts[0])
       }
     }
    })
