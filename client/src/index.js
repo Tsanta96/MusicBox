@@ -37,7 +37,8 @@ const token = localStorage.getItem("auth-token");
 
 cache.writeData({
   data: {
-    isLoggedIn: Boolean(localStorage.getItem("auth-token"))
+    isLoggedIn: Boolean(localStorage.getItem("auth-token")),
+    currentUser: false
   }
 });
 
@@ -50,7 +51,7 @@ if (token) {
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
-          cart: []
+          currentUser: data.verifyUser._id
         }
       });
     });

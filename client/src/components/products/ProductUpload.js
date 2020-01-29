@@ -1,7 +1,7 @@
 import React from 'react'
-import { Query, Mutation } from 'react-apollo';
+import { Query, Mutation, ApolloConsumer } from 'react-apollo';
 import { CREATE_PRODUCT } from '../../graphql/mutations';
-import { FETCH_CATEGORIES } from '../../graphql/queries';
+import { FETCH_CATEGORIES, FETCH_USER } from '../../graphql/queries';
 
 class ProductUpload extends React.Component {
     constructor(props) {
@@ -11,124 +11,175 @@ class ProductUpload extends React.Component {
             name: "",
             category: "",
             description: "",
-            sellerId: "testId",
-            inventoryAmount: "",
-            price: "",
-            weight: "",
-            productImageUrl: ""
+            sellerId: "",
+            inventoryAmount: 0,
+            price: 0,
+            weight: 0,
+            imageUrl: "",
+            errors: []
         }
 
         this.update = this.update.bind(this);
+        this.checkErrors = this.checkErrors.bind(this);
+        this.renderErrors = this.renderErrors.bind(this);
+    }
+
+    checkErrors(){
+        let errorIndices = [];
+        Object.values(this.state).slice(0,7).forEach((val, idx) => {
+            if (val === "" || val === 0) errorIndices.push(idx);
+        });
+        debugger;
+        return errorIndices;
+    }
+
+    renderErrors(errorIndices) {
+        const stateArr = Object.keys(this.state);
+        errorIndices.forEach(idx => this.setState({
+            errors: this.state.errors.push(stateArr[idx].toString().toUpperCase() + ' field cannot be blank')
+        }))
+        debugger;
+        return (
+            <div>
+                <ul>
+                    {this.state.errors.map(error => <li>{error}</li>)}
+                </ul>
+            </div>
+        )
     }
 
     update(field) {
         return e => {
-            this.setState({ [field]: e.target.value })
+            if (field === "inventoryAmount" || field === "weight" || field === "price") {
+                const int = parseInt(e.target.value, 10);
+                this.setState({ [field]: int})
+            } else {
+                this.setState({ [field]: e.target.value })
+            }
         }
     }
 
     render() {
         return(
-            <Mutation 
-                mutation={CREATE_PRODUCT}
-            >
-                {createProduct => (
-                <div>
-                    <h1>List Your Product!</h1>
-                    <form
-                        onSubmit={e => {
-                            e.preventDefault();
-                            console.log(this.state);
-                            //updateProductCategory 
-                            createProduct({
-                                variables: {
-                                    name: this.state.name,
-                                    description: this.state.description,
-                                    sellerId: this.state.sellerId, //GET THE SELLER ID
-                                    inventoryAmount: this.state.inventoryAmount,
-                                    price: this.state.price,
-                                    weight: this.state.weight,
-                                    productImageUrl: this.state.productImageUrl
-                                }
-                            });
-                        }}
-                        >
-                        <label> Name
-                        <br></br>
-                            <input 
-                                type="text"
-                                value={this.state.name}
-                                onChange={this.update("name")}
-                            />
-                        </label>
-                        <br></br>
-                        <label> Category Type:
-                        <br></br>
-                            <Query query={FETCH_CATEGORIES}>
-                                {({ loading, error, data }) => {
-                                    if (loading) return <p>Loading...</p>;
-                                    if (error) return <p>Error</p>;
-                                    console.log(data);
-                                    return data.categories.map(({ name, _id }, idx) => (
-                                        <label key={idx}>{name}
-                                            <input type="radio" name="category" value={_id} onChange={this.update("category")}></input>
-                                            <br></br>
-                                        </label>
-                                    )); 
+            <ApolloConsumer> 
+                { cache => { 
+                    const user = cache.readQuery({ query: FETCH_USER });
+                    if (!user) return <div>Loading...</div>
+                    
+                    return <Mutation mutation={CREATE_PRODUCT}>
+                        {createProduct => (
+                        <div>
+                            <h1>List Your Product!</h1>
+                            <form
+                                onSubmit={e => {
+                                    e.preventDefault();
+                                    const errorIndices = this.checkErrors();
+                                    console.log("SUBMIT STATE: ", this.state);
+                                    if (errorIndices.length > 0){
+                                        return this.renderErrors(errorIndices)
+                                    } else {
+                                        //updteProductCategory 
+                                        createProduct({
+                                            variables: {
+                                                name: this.state.name,
+                                                description: this.state.description,
+                                                category: this.state.category,
+                                                seller: user.currentUser,
+                                                inventoryAmount: this.state.inventoryAmount,
+                                                price: this.state.price,
+                                                weight: this.state.weight,
+                                                imageUrl: this.state.imageUrl
+                                            }
+                                        });
+                                    }
                                 }}
-                            </Query>
-                        </label>
-                        <label> Description
-                        <br></br>
-                            <textarea 
-                                value={this.state.description} 
-                                onChange={this.update("description")}
-                            />
-                        </label>
-                        <br></br>
-                        <label> InventoryAmount
-                        <br></br>
-                            <input 
-                                type="number"
-                                name="inventory"
-                                value={this.state.inventoryAmount}
-                                onChange={this.update("inventoryAmount")}
-                                min="1" max="10000"
-                            />
-                        </label>
-                        <br></br>
-                        <label> Price 
-                        <br></br>
-                            <input 
-                                type="text"
-                                name="price"
-                                value={this.state.price}
-                                onChange={this.update("price")}
-                            />$
-                        </label>
-                        <br></br>
-                        <label> Weight
-                        <br></br>
-                            <input 
-                                type="text"
-                                value={this.state.weight}
-                                onChange={this.update("weight")}
-                            />lb
-                        </label>
-                        <br></br>
-                        <label> Product Image
-                        <br></br>
-                            <input 
-                                type="file"
-                                value={this.state.productImageUrl}
-                                onChange={this.update("productImageUrl")}
-                            /> 
-                        </label>
-                        <button type="submit">List Your Product!</button>
-                    </form>
-                </div>
-                )}
-            </Mutation>
+                                >
+                                <label> Name
+                                <br></br>
+                                    <input 
+                                        type="text"
+                                        value={this.state.name}
+                                        onChange={this.update("name")}
+                                    />
+                                </label>
+                                <br></br>
+                                <label> Category Type:
+                                <br></br>
+                                    <Query query={FETCH_CATEGORIES}
+                                    onCompleted={data => {
+                                        console.log("DATA", data);
+                                        this.setState({ category: data.categories[0]._id })}
+                                    }
+                                    >
+                                        {({ loading, error, data }) => {
+                                            if (loading) return <p>Loading...</p>;
+                                            if (error) return <p>Error</p>;
+                                            return (
+                                                <div>
+                                                    <select onChange={this.update("category")}>
+                                                        {data.categories.map(({ name, _id }, idx) => (
+                                                            <option key={idx} name="category" value={_id}>{name}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            )
+                                        }
+                                    }
+                                    </Query>
+                                </label>
+                                <label> Description
+                                <br></br>
+                                    <textarea 
+                                        value={this.state.description} 
+                                        onChange={this.update("description")}
+                                    />
+                                </label>
+                                <br></br>
+                                <label> InventoryAmount
+                                <br></br>
+                                    <input 
+                                        type="number"
+                                        name="inventory"
+                                        value={this.state.inventoryAmount}
+                                        onChange={this.update("inventoryAmount")}
+                                        min={1} max={10000}
+                                    />
+                                </label>
+                                <br></br>
+                                <label> Price 
+                                <br></br>
+                                    <input 
+                                        type="text"
+                                        name="price"
+                                        value={this.state.price}
+                                        onChange={this.update("price")}
+                                    />$
+                                </label>
+                                <br></br>
+                                <label> Weight
+                                <br></br>
+                                    <input 
+                                        type="text"
+                                        value={this.state.weight}
+                                        onChange={this.update("weight")}
+                                    />lb
+                                </label>
+                                <br></br>
+                                <label> Product Image
+                                <br></br>
+                                    <input 
+                                        type="file"
+                                        value={this.state.imageUrl}
+                                        onChange={this.update("imageUrl")}
+                                    /> 
+                                </label>
+                                <button type="submit">List Your Product!</button>
+                            </form>
+                        </div>
+                        )}
+                    </Mutation>
+                }}
+            </ApolloConsumer>
         )
     }
 }

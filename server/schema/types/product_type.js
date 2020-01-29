@@ -28,7 +28,7 @@ const ProductType = new GraphQLObjectType({
     inventoryAmount: { type: GraphQLInt},
     price: { type: GraphQLFloat },
     weight: { type: GraphQLInt },
-    productImageUrl: { type: GraphQLString }
+    imageUrl: { type: GraphQLString }
   })
 });
 

@@ -10,13 +10,14 @@ const Nav = props => {
       {client => (
         <Query query={IS_LOGGED_IN}>
           {({ data }) => {
+            console.log("nav data: ", data);
             if (data.isLoggedIn) {
               return (
                 <button
                   onClick={e => {
                     e.preventDefault();
                     localStorage.removeItem("auth-token");
-                    client.writeData({ data: { isLoggedIn: false } });
+                    client.writeData({ data: { isLoggedIn: false, currentUser: 2 } });
                     props.history.push("/");
                   }}
                 >

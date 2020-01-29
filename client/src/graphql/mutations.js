@@ -5,6 +5,7 @@ export const LOGIN_USER = gql `
     login(email: $email, password: $password) {
       token
       loggedIn
+      _id
     }
   }
 `;
@@ -12,7 +13,8 @@ export const LOGIN_USER = gql `
 export const VERIFY_USER = gql `
   mutation VerifyUser($token: String!) {
     verifyUser(token: $token) {
-      loggedIn
+      loggedIn,
+      _id
     }
   }
 `;
@@ -29,10 +31,13 @@ export const REGISTER_USER = gql `
 export const ADD_TO_CART = gql `
   mutation AddToCart($productId: ID!, $cartId: ID!) {
     addToCart(productId: $productId, cartId: $cartId) {
-      cart {
+      _id
+      user {
         _id
-        user
-        products
+        name
+      }
+      products {
+        name
       }
     }
   }
@@ -51,16 +56,24 @@ export const CREATE_CART = gql`
 `;
 
 export const CREATE_PRODUCT = gql`
-  mutation CreateProduct($name: String!, $description: String!, $seller: ID!, 
-  $inventoryAmount: Int!, $price: Int!, $weight: Int!, $productImageUrl: String!) {
+  mutation CreateProduct($name: String!, $description: String!, $category: ID!, $seller: ID!, 
+  $inventoryAmount: Int!, $price: Float!, $weight: Int!, $imageUrl: String) {
     
-    newProduct(name: $name, description: $description, seller: $seller,
-    inventoryAmount: $inventoryAmount, price: $price, weight: $weight, productImageUrl: $productImageUrl) {
+    newProduct(name: $name, description: $description, category: $category, seller: $seller,
+    inventoryAmount: $inventoryAmount, price: $price, weight: $weight, imageUrl: $imageUrl) {
       _id
-      productImageUrl
+      imageUrl
     }
   }
 `;
+
+// export const CREATE_PRODUCT = gql `
+//   mutation CreateProduct($name: String!, $description: String!, $category: ID!, $seller: ID!, $inventoryAmount: Int!) {
+//     newProduct(name: $name, description: $description, category: $category, seller: $seller, inventoryAmount: $inventoryAmount) {
+//       _id
+//     }
+//   }
+// `;
 
 // name: "testproduct", category: "instruments", description: "this is a test product", seller: "5e309ec1c4581c97b85fcd89", inventoryAmount: 43, price: 100, weight: 5, productImageUrl: "testproduct.com"
     
