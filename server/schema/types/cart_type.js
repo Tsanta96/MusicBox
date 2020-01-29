@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql;
 const Cart = mongoose.model("cart");
+const Category = mongoose.model("category");
 
 const CartType = new GraphQLObjectType({
   name: "CartType",
@@ -18,9 +19,11 @@ const CartType = new GraphQLObjectType({
     },
     products: {
         type: new GraphQLList(require("./product_type")),
-        resolve(parentValue) {(
-            Category.findProducts(parentValue._id)
-        )}
+        resolve(parentValue) {{
+          // console.log("parentValue: ", parentValue);
+          // return Category.findProducts(parentValue._id)
+          return parentValue.products
+        }}
     }
   })
 });

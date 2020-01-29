@@ -1,25 +1,22 @@
 import { FETCH_PRODUCTS } from '../../graphql/queries';
 import { ADD_TO_CART } from '../../graphql/mutations';
 import { Query, Mutation } from "react-apollo";
+import AddToCart from '../cart/AddToCart';
 import React from 'react';
 
 export default class ProductIndex extends React.Component {
-    addToCart(){
+    addToCart(productId){
         return (
-        <Mutation mutation={ADD_TO_CART}>
-            {addToCart => (
-                <p onClick={
+            <Mutation mutation={ADD_TO_CART}>
+                {addToCart => (
                     addToCart({
                         variables: {
-                            productId: '',
+                            productId: productId,
                             cartId: ''
                         }
                     })
-                }>
-                    Add to Cart
-                </p>
-            )}
-        </Mutation>
+                )}
+            </Mutation>
         )
     }
 
@@ -35,7 +32,7 @@ export default class ProductIndex extends React.Component {
                 {data.products.map(product => (
                     <li key={product._id}>
                         <span>{product.name}</span>
-                        <p>Add to Cart</p>
+                        <AddToCart productId={product._id} price={product.price} />
                     </li>
                 ))}
                 </ul>
