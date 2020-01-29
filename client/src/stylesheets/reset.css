@@ -38,7 +38,7 @@ small {
     background: transparent;
 }
 
-ul {
+ul, li {
     list-style: none;
 }
 

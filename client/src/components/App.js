@@ -5,12 +5,12 @@ import ProductIndex from './products/ProductIndex';
 import Login from './Login';
 import Register from './Register';
 import AuthRoute from '../util/route_util';
-import Nav from './Nav';
+import NavBar from './NavBar/NavBar'
 
 const App = () => {
   return (
     <div>
-      <Route exact path="/" component={Nav}/>
+      <Route exact path="/" component={NavBar}/>
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/register" component={Register} routeType="auth" />
