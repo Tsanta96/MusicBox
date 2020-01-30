@@ -55,19 +55,6 @@ class Register extends Component {
                     onCompleted={data => {
                         const { token } = data.register;
                         localStorage.setItem("auth-token", token);
-                        // client
-                        //     .mutate({mutation: CREATE_CART, variables: {userId: data.register._id}})
-                        //     .then(({data2}) => {
-                        //         console.log(data);
-                        //         console.log(data2);
-                        //         client.writeData({
-                        //             data: {
-                        //                 cart: {
-                        //                     user: data.register._id
-                        //                 }
-                        //             }
-                        //         })
-                        //     })
                         this.props.history.push("/");
                     }}
                     onError={({ graphQLErrors }) => {

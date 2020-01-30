@@ -35,13 +35,30 @@ const mutation = new GraphQLObjectType({
             type: ProductType,
             args: {
                 name: { type: GraphQLString },
+                category: { type: GraphQLID },
                 description: { type: GraphQLString },
+                seller: { type: GraphQLID },
+                inventoryAmount: { type: GraphQLInt},
                 weight: { type: GraphQLInt },
-                price: { type: GraphQLFloat }
+                price: { type: GraphQLFloat },
+                imageUrl: { type: GraphQLString}
+
             },
-            resolve(_, { name, description, weight, price }) {(
-                new Product({ name, description, weight, price }).save()
-            )}
+            resolve(_, { name, category, description, seller, weight, price, inventoryAmount, imageUrl }) {
+                console.log("THHHHIIIIIS");
+                const newProduct = new Product({ name, category, description, seller, weight, price, inventoryAmount, imageUrl })
+
+                return newProduct.save()
+                    .then(product => {
+                        Product.updateProductCategory(product._id, category)
+                        console.log("prod cat --> ", product.category);
+                        // const newerProduct = product.populate('category').save()
+                        // console.log("Is it populated?", newerProduct.populated('category'));
+                    })
+                    // }).catch((err) => {
+                    //     console.log("save didn't work");
+                    // })
+            }
         },
         newCart: {
             type: CartType,
