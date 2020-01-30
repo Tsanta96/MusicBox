@@ -12,7 +12,7 @@ import NavBar from './NavBar/NavBar'
 const App = () => {
   return (
     <div>
-      <Route exact path="/" component={NavBar}/>
+      <Route path="/" component={NavBar}/>
       <Switch>
         <Route exact path="/upload" component={ProductUpload} />
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
