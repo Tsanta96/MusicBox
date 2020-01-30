@@ -2,6 +2,12 @@
     display: flex;
     background-color: rgb(35,46,63);
     padding: 1.0%;
+    align-items: center;
+}
+
+@font-face {
+    font-family: 'Amazon Ember';
+    src: url('./Amazon\ Ember\ Regular.ttf');
 }
 
 .white {
@@ -10,3 +16,75 @@
     border-bottom: 2px solid orange;
     color: white;
 }
+
+.nav-user-name {
+    margin-left: 4%;
+    width: 25%;
+    line-height: 1.1em;
+}
+
+.nav-user-name:hover {
+    .account-dropdown{
+        display: block;
+    }
+}
+
+.nav-user-only-name {
+    font-family: 'Amazon Ember', sans-serif;
+    color: rgb(202,202,202);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.relative-container {
+    position: relative;
+}
+
+.account-dropdown{
+    display: none;
+    position: absolute;
+    background-color: white;
+    z-index: 2;
+    color: black;
+    padding: 4% 10% 10% 10%;
+    line-height: 1.5em;
+    li {
+        font-family: 'Amazon Ember';
+    }
+    li:hover {
+        color: rgb(240,136,48);
+        text-decoration: underline;
+    }
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.arrow-grey {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-style: solid;
+  border-color: rgb(202,202,202);
+  border-width: 0px 4px 4px 0px;
+  transform: rotate(45deg);
+  transition: border-width 150ms ease-in-out;
+  margin-left: 5px;
+}
+
+.row {
+    display: flex;
+}
+.nav-account-header {
+    color: white;
+    font-size: 16px;
+    font-family: 'Amazon Ember', sans-serif;
+    font-weight: bold;
+}
+
+.account-dropdown-header {
+    font-weight: bold;
+    font-family: 'Amazon Ember', sans-serif;
+    color: rgb(35,47,62);
+    margin-bottom: 1em;
+}
+

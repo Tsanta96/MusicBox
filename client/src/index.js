@@ -37,7 +37,9 @@ const token = localStorage.getItem("auth-token");
 
 cache.writeData({
   data: {
-    isLoggedIn: Boolean(localStorage.getItem("auth-token"))
+    isLoggedIn: Boolean(localStorage.getItem("auth-token")),
+    email: false,
+    name: false
   }
 });
 
@@ -47,10 +49,13 @@ if (token) {
     // user is loggedIn
     .mutate({ mutation: VERIFY_USER, variables: { token } })
     .then(({ data }) => {
+      console.log("Data from verifyUser", data);
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
-          currentUser: data.verifyUser._id
+          currentUser: data.verifyUser._id,
+          email: data.verifyUser.email,
+          name: data.verifyUser.name
         }
       });
     });

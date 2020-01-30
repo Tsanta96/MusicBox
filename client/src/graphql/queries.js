@@ -16,6 +16,8 @@ export const FETCH_PRODUCTS = gql `
 export const IS_LOGGED_IN = gql `
     query IsUserLoggedIn {
         isLoggedIn @client
+        name @client
+        email @client
     }
 `;
 
@@ -36,3 +38,10 @@ export const FETCH_USER = gql `
       currentUser @client
     }
 `;
+
+// export const FULL_USER = gql `
+//   query fullUser {
+//     name @client,
+//     email @client
+//   }
+// `;

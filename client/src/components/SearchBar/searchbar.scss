@@ -46,7 +46,7 @@ input[type="submit"] {
 .search-bar {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 50%;
     input {
         background-color: white;
     }
@@ -121,7 +121,7 @@ ul, li {
 }
 
 .search-input {
-    width: 50%;
+    width: 100%;
 }
 
 .select-background {
@@ -147,4 +147,8 @@ ul, li {
 
 .amz-search-icon {
     font-size: 1.5em;
+}
+
+.nav-user-name {
+    color: white;
 }
