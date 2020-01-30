@@ -1,7 +1,10 @@
-import React from 'react'
-import { Query, Mutation, ApolloConsumer } from 'react-apollo';
-import { CREATE_PRODUCT } from '../../graphql/mutations';
+import React from 'react';
+import axios from 'axios';
+import uuidv1 from 'uuid/v1';
+import { Query, Mutation, ApolloConsumer, useMutation } from 'react-apollo';
+import { CREATE_PRODUCT, CREATE_PHOTO, S3_SIGN } from '../../graphql/mutations';
 import { FETCH_CATEGORIES, FETCH_USER } from '../../graphql/queries';
+import Dropzone from 'react-dropzone';
 import '../../stylesheets/product_upload.scss';
 
 class ProductUpload extends React.Component {
@@ -16,12 +19,16 @@ class ProductUpload extends React.Component {
             price: 0,
             weight: 0,
             imageUrl: "",
-            errors: []
+            errors: [],
+            photo: null
         }
 
         this.update = this.update.bind(this);
         this.checkErrors = this.checkErrors.bind(this);
         this.renderErrors = this.renderErrors.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
+        this.uploadToS3 = this.uploadToS3.bind(this);
     }
 
     checkErrors(){
@@ -55,6 +62,67 @@ class ProductUpload extends React.Component {
         }
     }
 
+    onDrop = async files => {
+        this.setState({ photo: files[0] });
+    };
+
+    uploadToS3 = async (photo, signedRequest) => {
+        const options = {
+          headers: {
+            "Content-Type": photo.type
+          }
+        };
+        await axios.put(signedRequest, photo, options);
+      };
+
+    uniqueName() {
+        return uuidv1();
+    }
+
+    uploadFile = async () => {
+        const { photo } = this.state;
+        console.log(1, "hit this?");
+        debugger;
+
+        // const response = await this.props.s3Sign({
+        //   variables: {
+        //     filename: photo.name,
+        //     filetype: photo.type
+        //   }
+        // });
+        
+        const [s3Sign, { s3SignData }] = useMutation(S3_SIGN);
+        const response = s3Sign({ 
+            variables: {
+                filename: photo.name.uniqueName(),
+                filetype: photo.type
+            } 
+        })
+        debugger;
+    
+        console.log('s3sign mutation: ', response.data);
+        const { signedRequest, url } = response.data.signS3;
+        
+        await this.uploadToS3(photo, signedRequest);
+    
+        // const graphqlResponse = await this.props.createChampion({
+        //   variables: {
+        //     name,
+        //     pictureUrl: url
+        //   }
+        // });
+        debugger;
+        
+        const [createPhoto, { createPhotoData }] = useMutation(CREATE_PHOTO);
+        const graphqlResponse = createPhoto({
+            variables: {
+                pictureUrl: url
+            }
+        })
+        console.log(graphqlResponse.data);
+        this.setState({ imageUrl: graphqlResponse.data.createPhoto.id });
+    }
+
     render() {
         return(
             <ApolloConsumer> 
@@ -78,19 +146,19 @@ class ProductUpload extends React.Component {
                                         if (errorIndices.length > 0){
                                             this.renderErrors(errorIndices)
                                         } else {
-                                            //updteProductCategory 
-                                            createProduct({
-                                                variables: {
-                                                    name: this.state.name,
-                                                    description: this.state.description,
-                                                    category: this.state.category,
-                                                    seller: user.currentUser,
-                                                    inventoryAmount: this.state.inventoryAmount,
-                                                    price: this.state.price,
-                                                    weight: this.state.weight,
-                                                    imageUrl: this.state.imageUrl
-                                                }
-                                            });
+                                            this.uploadFile() //.then(
+                                            // createProduct({
+                                            //     variables: {
+                                            //         name: this.state.name,
+                                            //         description: this.state.description,
+                                            //         category: this.state.category,
+                                            //         seller: user.currentUser,
+                                            //         inventoryAmount: this.state.inventoryAmount,
+                                            //         price: this.state.price,
+                                            //         weight: this.state.weight,
+                                            //         imageUrl: this.state.imageUrl
+                                            //     }
+                                            // }));
                                         }
                                     }}
                                 >   
@@ -175,21 +243,35 @@ class ProductUpload extends React.Component {
                                                 <div className="right-side-upload-inner-content">
                                                     <label> Product Image
                                                     <br></br>
-                                                        <input 
-                                                            type="file"
-                                                            value={this.state.imageUrl}
-                                                            onChange={this.update("imageUrl")}
-                                                        /> 
+                                                        <div className="dropzone">
+                                                            <Dropzone onDrop={this.onDrop}>
+                                                                {({getRootProps, getInputProps}) => (
+                                                                    <div {...getRootProps()}>
+                                                                        <input {...getInputProps()} />
+                                                                        <p>Drag 'n' drop some files here, or click to select files</p>
+                                                                    </div>
+                                                                )}
+                                                            </Dropzone>
+                                                        </div>
                                                     </label>
                                                 </div>
                                             </div>
+                                            {/* <div>
+                                                <ul className="product-upload-errors">
+                                                    {this.state.errors.map((error, idx) => (
+                                                        <li key={idx}>
+                                                            <p>{error}</p>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div> */}
                                             <div className="upload-button">
                                                 <button type="submit">List It!</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div>
-                                        <ul>
+                                        <ul className="product-upload-errors">
                                             {this.state.errors.map((error, idx) => (
                                                 <li key={idx}>
                                                     <p>{error}</p>

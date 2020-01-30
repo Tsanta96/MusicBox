@@ -1,4 +1,5 @@
 const graphql = require("graphql");
+const keys = require('../../config/keys');
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID, GraphQLFloat } = graphql;
 const mongoose = require("mongoose");
 const CategoryType = require("./types/category_type");
@@ -9,6 +10,7 @@ const UserType = require("./types/user_type");
 const CartType = require("./types/cart_type");
 const Cart = mongoose.model("cart");
 const AuthService = require("../services/auth");
+const aws = require('aws-sdk');
 
 const mutation = new GraphQLObjectType({
     name: "Mutation",
@@ -147,6 +149,43 @@ const mutation = new GraphQLObjectType({
             },
             resolve(_, args) {
                 return AuthService.verifyUser(args);
+            }
+        },
+        signS3: {
+            type: ProductType,
+            args: {
+                filename: { type: GraphQLString },
+                filetype: { type: GraphQLString }
+            },
+            async resolve(parent, { filename, filetype }) {
+                console.log("filename", filename);
+                aws.config.update({
+                    accessKeyId: keys.iam_access_id,
+                    secretAccessKey: keys.iam_secret,
+                    region: 'us-east-2'
+                });
+                // AWS_ACCESS_KEY_ID
+                // AWS_SECRET_ACCESS_KEY
+                const s3 = new aws.S3({
+                    signatureVersion: 'v4',
+                    region: 'us-east-2',
+                });
+
+                const s3Params = {
+                    Bucket: 'musicbox-products',
+                    Key: filename,
+                    Expires: 60,
+                    ContentType: filetype,
+                    ACL: 'public-read',
+                };
+
+                const signedRequest = await s3.getSignedUrl('putObject', s3Params);
+                const url = `https://${s3Params.Bucket}.s3.amazonaws.com/${filename}`;
+
+                return {
+                    signedRequest,
+                    url
+                };
             }
         }
     }

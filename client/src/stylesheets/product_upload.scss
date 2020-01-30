@@ -114,10 +114,19 @@ $off-white: rgb(238, 238, 238);
         height: 80%;
         margin-left: 20px;
         margin-top: 20px;
+        .dropzone {
+            margin: 0 auto;
+            width: 60%;
+            margin-top: 20px;
+            margin-left: 50px;
+            border: 1px dashed white;
+            cursor: pointer;
+            padding: 10% 10%;
+            font-size: 15px;
+            text-align: center;
+        }
     }
 }
-
-
 
 .upload-button {
     text-align: right;
@@ -138,4 +147,9 @@ $off-white: rgb(238, 238, 238);
         // background-color: orange;
         color: #232e3e;
     }
+}
+
+.product-upload-errors {
+    color: black;
+    font-size: 12px;
 }

@@ -38,11 +38,19 @@ const ProductSchema = new Schema({
     required: false
   },
   reviews: [
-          {
-              type: Schema.Types.ObjectId,
-              ref: "review"
-          }
-  ]
+    {
+        type: Schema.Types.ObjectId,
+        ref: "review"
+    }
+  ],
+  filename: {
+    type: String,
+    required: false
+  },
+  filetype: {
+    type: String,
+    required: false
+  }
 });
 
 ProductSchema.statics.updateProductCategory = (productId, categoryId) => {
