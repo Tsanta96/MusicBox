@@ -2,7 +2,7 @@ import React from 'react'
 import { Query, Mutation, ApolloConsumer } from 'react-apollo';
 import { CREATE_PRODUCT } from '../../graphql/mutations';
 import { FETCH_CATEGORIES, FETCH_USER } from '../../graphql/queries';
-import '../../stylesheets/product_index.scss';
+import '../../stylesheets/product_upload.scss';
 
 class ProductUpload extends React.Component {
     constructor(props) {
