@@ -2,7 +2,8 @@ import React from 'react';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './searchbar.scss'
-export default class SearchBar extends React.Component {
+import { withRouter } from 'react-router-dom';
+class SearchBar extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -22,20 +23,21 @@ export default class SearchBar extends React.Component {
             "recording",
             "amplifiers",
             "karaoke"
-        ]
+        ];
         const dropdownContent = categories.map((category, i) => (
-            <li key={i} onMouseDown={() => this.setState({category})}>{capitalize(category)}</li>
+            <li key={i} onMouseDown={() => {
+              this.setState({ category });
+              this.props.history.push(`/search/${category}`)
+            }}>{capitalize(category)}</li>
         ));
         return (
           <div className="search-bar">
             <div className="select-box">
               <div tabIndex="0" className="select-background" onMouseDown={() => {
-                  console.log(this.state)
                   this.setState(prevState => ({
                     showDropdown: !prevState.showDropdown
                   }));
               }} onBlur={() => {
-                console.log("Onblur activated");
                 this.setState({ showDropdown: false });
               }}>
                 <p className="select-display">
@@ -63,3 +65,5 @@ export default class SearchBar extends React.Component {
         );
     }
 }
+
+export default withRouter(SearchBar);

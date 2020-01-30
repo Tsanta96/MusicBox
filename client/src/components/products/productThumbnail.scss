@@ -1,0 +1,41 @@
+.product-thumbnail {
+    width: 300px;
+    height: 420px;
+    border-bottom: 2px solid rgb(221,221,221) ;
+}
+
+.product-thumb-name {
+    font-family: 'Amazon Ember', sans-serif, Arial, Helvetica;
+    max-height: 84px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 21px;
+    font-family: 'Amazon Ember';
+    font-weight: bold;
+}
+
+.product-row-up {
+    display: flex;
+    align-items: flex-start;
+    font-family: 'Amazon Ember';
+    font-weight: bold;
+}
+
+.product-dollar-sign, .last-two-price {
+    font-size: 12px;
+}
+
+.empty-height {
+    height: 1.5em;
+}
+
+.img-thumbnail {
+    width: 100%;
+    height: 270px;
+}
+
+
+

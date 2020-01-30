@@ -8,16 +8,22 @@ import AuthRoute from '../util/route_util';
 import Nav from './Nav';
 import ProductUpload from './products/ProductUpload';
 import NavBar from './NavBar/NavBar'
-
+import SearchIndex from './SearchIndex/SearchIndex';
 const App = () => {
   return (
     <div>
-      <Route path="/" component={NavBar}/>
+      <NavBar />
       <Switch>
         <Route exact path="/upload" component={ProductUpload} />
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
-        <AuthRoute exact path="/register" component={Register} routeType="auth" />
-        <Route path="/" component={ProductIndex} />
+        <AuthRoute
+          exact
+          path="/register"
+          component={Register}
+          routeType="auth"
+        />
+        <Route exact path="/" component={ProductIndex} />
+        <Route exact path="/search/:category" component={SearchIndex} />
       </Switch>
     </div>
   );
