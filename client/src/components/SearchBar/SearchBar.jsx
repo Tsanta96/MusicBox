@@ -2,7 +2,8 @@ import React from 'react';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './searchbar.scss'
-export default class SearchBar extends React.Component {
+import { withRouter } from 'react-router-dom';
+class SearchBar extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -64,3 +65,5 @@ export default class SearchBar extends React.Component {
         );
     }
 }
+
+export default withRouter(SearchBar);

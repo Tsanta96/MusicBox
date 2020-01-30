@@ -5,10 +5,12 @@ import gql from "graphql-tag";
 export const FETCH_PRODUCTS = gql `
   {
     products {
-      _id
-      name
-      description
-      price
+      _id,
+      name,
+      description,
+      price,
+      weight,
+      imageUrl
     }
   }
 `;
@@ -59,6 +61,7 @@ export const PRODUCTS_BY_CATEGORY_BY_NAME = gql`
         products {
           _id,
           name,
+          imageUrl,
           category {
             name, 
             _id
