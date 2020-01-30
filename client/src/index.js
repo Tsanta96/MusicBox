@@ -39,6 +39,7 @@ const token = localStorage.getItem("auth-token");
 cache.writeData({
   data: {
     isLoggedIn: Boolean(localStorage.getItem("auth-token")),
+    currentUser: false,
     email: false,
     name: false,
     cart: null

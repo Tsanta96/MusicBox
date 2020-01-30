@@ -56,3 +56,27 @@ export const CREATE_CART = gql`
     }
   }
 `;
+
+export const CREATE_PRODUCT = gql`
+  mutation CreateProduct($name: String!, $description: String!, $category: ID!, $seller: ID!, 
+  $inventoryAmount: Int!, $price: Float!, $weight: Int!, $imageUrl: String) {
+    
+    newProduct(name: $name, description: $description, category: $category, seller: $seller,
+    inventoryAmount: $inventoryAmount, price: $price, weight: $weight, imageUrl: $imageUrl) {
+      _id
+      imageUrl
+    }
+  }
+`;
+
+// export const CREATE_PRODUCT = gql `
+//   mutation CreateProduct($name: String!, $description: String!, $category: ID!, $seller: ID!, $inventoryAmount: Int!) {
+//     newProduct(name: $name, description: $description, category: $category, seller: $seller, inventoryAmount: $inventoryAmount) {
+//       _id
+//     }
+//   }
+// `;
+
+// name: "testproduct", category: "instruments", description: "this is a test product", seller: "5e309ec1c4581c97b85fcd89", inventoryAmount: 43, price: 100, weight: 5, productImageUrl: "testproduct.com"
+    
+// name: "testproduct", description: "this is a test product", weight: 5, price: 100

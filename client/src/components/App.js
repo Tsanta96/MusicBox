@@ -5,6 +5,8 @@ import ProductIndex from './products/ProductIndex';
 import Login from './Login';
 import Register from './Register';
 import AuthRoute from '../util/route_util';
+import Nav from './Nav';
+import ProductUpload from './products/ProductUpload';
 import NavBar from './NavBar/NavBar'
 import SearchIndex from './SearchIndex/SearchIndex';
 const App = () => {
@@ -12,6 +14,7 @@ const App = () => {
     <div>
       <NavBar />
       <Switch>
+        <Route exact path="/upload" component={ProductUpload} />
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute
           exact

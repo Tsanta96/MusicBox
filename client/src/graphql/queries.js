@@ -30,6 +30,15 @@ export const IS_LOGGED_IN = gql`
          }
        `;
 
+export const FETCH_CATEGORIES = gql `
+  {
+    categories {
+      _id
+      name
+    }
+  }
+`;
+
 export const FIND_USER_CART = gql `
     query findUserCart($userId: ID!) {
       cart(userId: $userId) {
@@ -80,3 +89,4 @@ export const PRODUCTS_BY_CATEGORY_BY_NAME = gql`
 //     email @client
 //   }
 // `;
+
