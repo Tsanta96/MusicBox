@@ -14,7 +14,9 @@ export const VERIFY_USER = gql `
   mutation VerifyUser($token: String!) {
     verifyUser(token: $token) {
       loggedIn,
-      _id
+      _id,
+      name,
+      email
     }
   }
 `;

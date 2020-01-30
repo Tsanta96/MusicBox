@@ -11,9 +11,9 @@ const CategoryType = new GraphQLObjectType({
     name: { type: GraphQLString },
     products: {
         type: new GraphQLList(require("./product_type")),
-        resolve(parentValue) {(
-            Category.findProducts(parentValue._id)
-        )}
+        resolve(parentValue) {
+           return Category.findProducts(parentValue._id);
+        }
     }
   })
 });
