@@ -1,0 +1,141 @@
+@font-face {
+    src: url(../assets/fonts/OfficinaSansStd-Bold.otf);
+    font-family: amazon-font;
+}
+
+$off-white: rgb(238, 238, 238);
+
+.list-your-product {
+    width: 230px;
+    margin-top: 15px;
+    margin-left: 16%;
+    margin-bottom: 10px;
+    color: black;
+    font-family: amazon-font;
+    font-size: 30px;
+    border-bottom: 2px solid orange;
+}
+
+.product-upload-form-container {
+    background-image: linear-gradient(#2f3e57, #232e3e);
+    // background-color: #232e3e;
+    border: 1px solid black;
+    border-radius: 7px;
+    width: 70%; 
+    height: 410px;
+    margin: 0 auto;
+    font-family: amazon-font;
+    color: white;
+
+}
+
+.left-and-right-side-upload {
+    display: flex;
+    flex-direction: row;
+    height: 410px;
+    input, select {
+        margin-bottom: 10px;
+        width: 85%;
+        height: 20px;
+        // background-color: $off-white;
+    }
+    input[type="text"] {
+        border: 1px solid black;
+        border-radius: 3px;
+        font-size: 12px;
+        padding-left: 3px;
+        background-color: $off-white;
+        color: black;
+    }
+    input[type="text"]:focus {
+        border: 1px solid orange;
+        border-radius: 3px;
+        font-size: 12px;
+        padding-left: 3px;
+        background-color: $off-white;
+        color: black;
+    }
+    input[type="number"] {
+        width: 40%;
+        background-color: $off-white;
+        color: black;
+        font-size: 13px;
+        padding-left: 3px;
+    }
+    input[type="number"]:focus {
+        width: 40%;
+        background-color: orange;
+        color: black;
+        font-size: 13px;
+        padding-left: 3px;
+    }
+    textarea {
+        border: 1px solid black;
+        background-color: $off-white;
+        width: 85%;
+        height: 30%;
+        font-size: 13px;
+        font-family: sans-serif;
+        padding-left: 2px;
+        margin-bottom: 7px;
+        color: black;
+    }
+    textarea:focus {
+        border: 1px solid orange;
+        background-color: $off-white;
+        width: 85%;
+        height: 30%;
+        font-size: 13px;
+        font-family: sans-serif;
+        padding-left: 2px;
+        margin-bottom: 7px;
+        color: black
+    }
+}
+
+.left-side-upload {
+    width: 60%;
+    height: 100%;
+    .left-side-upload-inner-content {
+        width: 80%;
+        height: 80%;
+        margin-left: 20px;
+        margin-top: 15px;
+    }
+}
+
+.right-side-upload {
+    width: 95%;
+    height: 70%;
+    border-left: 2px solid orange;
+    border-bottom: 2px solid orange;
+    .right-side-upload-inner-content {
+        width: 80%;
+        height: 80%;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+}
+
+
+
+.upload-button {
+    text-align: right;
+    margin-right: 25px;
+    margin-top: 25px;
+
+    button {
+        font-size: 23px;
+        border: 1px solid orange;
+        padding: 7px;
+        border-radius: 5px;
+        width: 100px;
+        text-align: center;
+    }
+
+    button:hover {
+        background-image: linear-gradient(rgb(255, 188, 64), orange);
+        // background-color: orange;
+        color: #232e3e;
+    }
+}
