@@ -11,7 +11,6 @@ class ProductUpload extends React.Component {
             name: "",
             category: "",
             description: "",
-            sellerId: "",
             inventoryAmount: 0,
             price: 0,
             weight: 0,
@@ -26,26 +25,22 @@ class ProductUpload extends React.Component {
 
     checkErrors(){
         let errorIndices = [];
-        Object.values(this.state).slice(0,7).forEach((val, idx) => {
+        Object.values(this.state).slice(0,6).forEach((val, idx) => {
             if (val === "" || val === 0) errorIndices.push(idx);
         });
-        debugger;
         return errorIndices;
     }
 
     renderErrors(errorIndices) {
-        const stateArr = Object.keys(this.state);
-        errorIndices.forEach(idx => this.setState({
-            errors: this.state.errors.push(stateArr[idx].toString().toUpperCase() + ' field cannot be blank')
-        }))
-        debugger;
-        return (
-            <div>
-                <ul>
-                    {this.state.errors.map(error => <li>{error}</li>)}
-                </ul>
-            </div>
-        )
+        if (errorIndices === []) {
+            return (
+                <div></div>
+            )
+        } else {
+            const stateArr = Object.keys(this.state);
+            const errors = errorIndices.map(idx => stateArr[idx].toString() + ' field cannot be blank');
+            this.setState({ errors: errors });
+        }
     }
 
     update(field) {
@@ -66,17 +61,21 @@ class ProductUpload extends React.Component {
                     const user = cache.readQuery({ query: FETCH_USER });
                     if (!user) return <div>Loading...</div>
                     
-                    return <Mutation mutation={CREATE_PRODUCT}>
+                    return (
+                        <Mutation 
+                            mutation={CREATE_PRODUCT}
+                        >
                         {createProduct => (
                         <div>
                             <h1>List Your Product!</h1>
                             <form
                                 onSubmit={e => {
+                                    debugger;
                                     e.preventDefault();
                                     const errorIndices = this.checkErrors();
-                                    console.log("SUBMIT STATE: ", this.state);
+                                    console.log("errorIndices", errorIndices);
                                     if (errorIndices.length > 0){
-                                        return this.renderErrors(errorIndices)
+                                        this.renderErrors(errorIndices)
                                     } else {
                                         //updteProductCategory 
                                         createProduct({
@@ -174,11 +173,21 @@ class ProductUpload extends React.Component {
                                     /> 
                                 </label>
                                 <button type="submit">List Your Product!</button>
+                                <div>
+                                    <ul>
+                                        {this.state.errors.map((error, idx) => (
+                                            <li key={idx}>
+                                                <p>{error}</p>
+                                            </li>
+                                        ))}
+                                    {console.log("errors",this.state)}
+                                    </ul>
+                                </div>
                             </form>
                         </div>
                         )}
                     </Mutation>
-                }}
+                    )}}
             </ApolloConsumer>
         )
     }

@@ -67,6 +67,7 @@ ProductSchema.statics.updateProductCategory = (productId, categoryId) => {
       // console.log(5, newCategory);
       product.category = newCategory;
       newCategory.products.push(product);
+      // console.log("product: ", product.name, "category products: ", newCategory.products);
 
       return Promise.all([product.save(), newCategory.save()]).then(
         ([product, newCategory]) => product

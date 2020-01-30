@@ -45,17 +45,19 @@ const mutation = new GraphQLObjectType({
 
             },
             resolve(_, { name, category, description, seller, weight, price, inventoryAmount, imageUrl }) {
-                const newProduct = new Product({ name, category, description, seller, weight, price, inventoryAmount, imageUrl });
-                console.log("newProduct: ", newProduct);
+                console.log("THHHHIIIIIS");
+                const newProduct = new Product({ name, category, description, seller, weight, price, inventoryAmount, imageUrl })
+
                 return newProduct.save()
                     .then(product => {
-                        console.log(Category.findById(category))
-                        // console.log(".then product", product)
-                        // Product.updateProductCategory(product._id, category)
+                        Product.updateProductCategory(product._id, category)
+                        console.log("prod cat --> ",product.category);
+                        // const newerProduct = product.populate('category').save()
+                        // console.log("Is it populated?", newerProduct.populated('category'));
+                    })
                     // }).catch((err) => {
                     //     console.log("save didn't work");
                     // })
-                })
             }
         },
         newCart: {

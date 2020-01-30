@@ -31,6 +31,7 @@ const RootQueryType = new GraphQLObjectType({
         type: new GraphQLList(ProductType),
         resolve(){
           return Product.find({})
+            .populate('category')
         }
     },
     product: {
