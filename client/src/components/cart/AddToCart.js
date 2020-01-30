@@ -8,6 +8,7 @@ const AddToCart = props => {{
         <ApolloConsumer>
             { cache => {
                 const user = cache.readQuery({ query: FETCH_USER });
+                if (!user.currentUser) return <div></div>
                 return <Query 
                     query={FIND_USER_CART}
                     variables={{userId: user.currentUser}}
