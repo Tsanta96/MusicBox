@@ -12,7 +12,7 @@ const CategoryType = new GraphQLObjectType({
     products: {
         type: new GraphQLList(require("./product_type")),
         resolve(parentValue) {
-           return Category.findProducts(parentValue._id);
+          return Category.findProducts(parentValue._id);
         }
     }
   })

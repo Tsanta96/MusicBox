@@ -88,3 +88,34 @@
     margin-bottom: 1em;
 }
 
+.cart-icon {
+    background-image: url("./nav-sprite-global_bluebeacon-1x_optimized_layout1._CB468670774_.png");
+    background-repeat: repeat-x;
+    background-position: -10px -340px;
+    width: 38px;
+    height: 26px;
+    overflow: hidden;
+    display: block;
+}
+
+.shopping-cart {
+    display: flex;
+    position: relative;
+}
+
+.nav-number-items-in-cart {
+    color: rgb(240,136,48);
+    font-family: 'Amazon Ember', sans-serif;
+    position: absolute;
+    font-weight: bold;
+    left: 47%;
+    bottom: 47%;
+}
+
+.cart-label {
+    font-family: 'Amazon Ember';
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+}
+

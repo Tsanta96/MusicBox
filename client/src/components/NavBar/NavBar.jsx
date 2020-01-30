@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import { ApolloConsumer } from "react-apollo";
-import { FULL_USER, IS_LOGGED_IN } from "../../graphql/queries";
+import {IS_LOGGED_IN } from "../../graphql/queries";
 import SearchBar from '../SearchBar/SearchBar';
 import './navbar.scss';
 const NavBar = props => {
@@ -11,6 +11,7 @@ const NavBar = props => {
       {client => (
         <Query query={IS_LOGGED_IN}>
           {({ data, loading, error }) => {
+            console.log("new Data", data);
             if (loading) return <div>Loading...</div>;
             if (error) return <div></div>;
             if (data.isLoggedIn) {
@@ -28,7 +29,9 @@ const NavBar = props => {
                     </div>
                     <div className="relative-container">
                       <ul className="account-dropdown">
-                        <h1 className="account-dropdown-header">Your Account</h1>
+                        <h1 className="account-dropdown-header">
+                          Your Account
+                        </h1>
                         <li>
                           <Link to="#">Your Orders</Link>
                         </li>
@@ -47,6 +50,11 @@ const NavBar = props => {
                       </ul>
                     </div>
                   </div>
+                  <div className="shopping-cart">
+                    <p className="nav-number-items-in-cart">{data.cart ? data.cart.products.length.toString() : "0"}</p>
+                    <span className="cart-icon"></span>
+                  </div>
+                  <p className="cart-label">Cart</p>
                 </div>
               );
             } else {

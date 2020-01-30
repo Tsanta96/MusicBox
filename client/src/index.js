@@ -10,7 +10,8 @@ import { ApolloProvider } from "react-apollo";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import { HashRouter } from 'react-router-dom';
-import { VERIFY_USER } from './graphql/mutations';  
+import { VERIFY_USER } from './graphql/mutations';
+import { FIND_USER_CART } from './graphql/queries';
 
 const cache = new InMemoryCache({
     dataIdFromObject: object => object._id || null
@@ -39,7 +40,8 @@ cache.writeData({
   data: {
     isLoggedIn: Boolean(localStorage.getItem("auth-token")),
     email: false,
-    name: false
+    name: false,
+    cart: null
   }
 });
 
@@ -58,6 +60,15 @@ if (token) {
           name: data.verifyUser.name
         }
       });
+      client.query({ query: FIND_USER_CART, variables: { userId: data.verifyUser._id}})
+      .then(({data}) => {
+        console.log("second data", data);
+        cache.writeData({
+          data: {
+            cart: data.cart
+          }
+        });
+      })
     });
 }
 

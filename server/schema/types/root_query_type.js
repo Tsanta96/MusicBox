@@ -1,7 +1,7 @@
 require("../../models/index");
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql;
+const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLString } = graphql;
 const UserType = require("./user_type");
 const ProductType = require("./product_type");
 const CategoryType = require("./category_type");
@@ -28,45 +28,57 @@ const RootQueryType = new GraphQLObjectType({
       }
     },
     products: {
-        type: new GraphQLList(ProductType),
-        resolve(){
-          return Product.find({})
-        }
+      type: new GraphQLList(ProductType),
+      resolve() {
+        return Product.find({});
+      }
     },
     product: {
-        type: ProductType,
-        args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
-        resolve(_, args) {
-            return Product.findById(args._id)
-        }
+      type: ProductType,
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_, args) {
+        return Product.findById(args._id);
+      }
     },
     categories: {
-        type: new GraphQLList(CategoryType),
-        resolve(){
-            return Category.find({})
-        }
+      type: new GraphQLList(CategoryType),
+      resolve() {
+        return Category.find({});
+      }
     },
     category: {
-        type: CategoryType,
-        args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
-        resolve(_, args) {
-            return Category.findById(args._id)
-        }
+      type: CategoryType,
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_, args) {
+        return Category.findById(args._id);
+      }
+    },
+    categoryByName: {
+      type: new GraphQLList(CategoryType),
+      args: { name: { type: GraphQLString } },
+      resolve(_, args) {
+        return Category.find({ name: args.name })
+          .populate("products")
+      }
     },
     carts: {
       type: new GraphQLList(CartType),
-      resolve(){
-        return Cart.find({}).populate("user").populate("products")
+      resolve() {
+        return Cart.find({})
+          .populate("user")
+          .populate("products");
       }
     },
     cart: {
       type: CartType,
-      args: { userId: { type: new GraphQLNonNull(GraphQLID) }},
-      resolve(_, {userId}) {
-        return Cart.find({user: userId}).populate("products").then(carts => carts[0])
+      args: { userId: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_, { userId }) {
+        return Cart.find({ user: userId })
+          .populate("products")
+          .then(carts => carts[0]);
       }
     }
-   })
+  })
 });
 
 module.exports = RootQueryType;
