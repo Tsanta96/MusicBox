@@ -12,7 +12,6 @@ const SearchIndex = props => {
     });
 
     const { loading: loading2, error: error2, data: data2 } = useQuery(FETCH_PRODUCTS);
-    console.log("all products", data2);
     if (loading1 || loading2){
         return (<LoadingIcon />);
     } else if (data1 && data1.categoryByName.length > 0){

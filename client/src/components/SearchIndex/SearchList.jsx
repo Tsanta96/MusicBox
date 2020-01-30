@@ -11,6 +11,8 @@ const SearchList = props => {
                 imageUrl={product.imageUrl ? product.imageUrl : ""}
                 name={product.name}
                 price={product.price.toString()}
+                id={product._id}
+                key={product._id}
                 />)
             }
         </div>

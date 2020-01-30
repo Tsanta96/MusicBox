@@ -20,7 +20,7 @@ const ProductType = new GraphQLObjectType({
         type: require("./user_type"),
         resolver(parentValue){(
           Product.findById(parentValue._id)
-              .populate("user")
+              .populate("seller")
               .then(product => (product.seller))
         )}
     },

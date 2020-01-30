@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import ProductIndex from './products/ProductIndex';
 import Login from './Login';
@@ -9,6 +9,7 @@ import Nav from './Nav';
 import ProductUpload from './products/ProductUpload';
 import NavBar from './NavBar/NavBar'
 import SearchIndex from './SearchIndex/SearchIndex';
+import ProductShow from './products/ProductShow';
 const App = () => {
   return (
     <div>
@@ -22,8 +23,9 @@ const App = () => {
           component={Register}
           routeType="auth"
         />
-        <Route exact path="/" component={ProductIndex} />
+        <Route exact path="/" render={() => (<Redirect to="/search/all"/>)} />
         <Route exact path="/search/:category" component={SearchIndex} />
+        <Route exact path="/products/:productId" component={ProductShow}/>
       </Switch>
     </div>
   );
