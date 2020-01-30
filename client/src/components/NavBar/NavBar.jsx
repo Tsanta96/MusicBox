@@ -59,10 +59,38 @@ const NavBar = props => {
               );
             } else {
               return (
-                <div className="navBar">
-                  <Link to="/login">Login</Link>
-                  <br />
-                  <Link to="/register">Register</Link>
+                <div className="navbar">
+                  <h1 className="white">musicbox</h1>
+                  <SearchBar />
+                  <div className="nav-user-name">
+                    <p className="nav-user-only-name">Hello,</p>
+                    <div className="row">
+                      <p className="nav-account-header">Sign In</p>
+                      <div>
+                        <i className="arrow-grey left"></i>
+                      </div>
+                    </div>
+                    <div className="relative-container">
+                      <ul className="account-dropdown">
+                        <h1 className="account-dropdown-header">
+                          Sign In
+                        </h1>
+                        <li>
+                          <Link to="/login"><div className="login-btn">Login</div></Link>
+                        </li>
+                        <li>
+                          <Link to="/register"><div className="register-btn">Register</div></Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="shopping-cart">
+                    <p className="nav-number-items-in-cart">
+                      0
+                    </p>
+                    <span className="cart-icon"></span>
+                  </div>
+                  <p className="cart-label">Cart</p>
                 </div>
               );
             }
