@@ -51,7 +51,7 @@ const mutation = new GraphQLObjectType({
                 return newProduct.save()
                     .then(product => {
                         Product.updateProductCategory(product._id, category)
-                        console.log("prod cat --> ",product.category);
+                        console.log("prod cat --> ", product.category);
                         // const newerProduct = product.populate('category').save()
                         // console.log("Is it populated?", newerProduct.populated('category'));
                     })

@@ -70,7 +70,6 @@ class ProductUpload extends React.Component {
                             <h1>List Your Product!</h1>
                             <form
                                 onSubmit={e => {
-                                    debugger;
                                     e.preventDefault();
                                     const errorIndices = this.checkErrors();
                                     console.log("errorIndices", errorIndices);
