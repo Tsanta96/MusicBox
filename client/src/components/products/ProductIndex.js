@@ -5,21 +5,6 @@ import AddToCart from '../cart/AddToCart';
 import React from 'react';
 
 export default class ProductIndex extends React.Component {
-    addToCart(productId){
-        return (
-            <Mutation mutation={ADD_TO_CART}>
-                {addToCart => (
-                    addToCart({
-                        variables: {
-                            productId: productId,
-                            cartId: ''
-                        }
-                    })
-                )}
-            </Mutation>
-        )
-    }
-
     render(){
         return (
         <Query query={FETCH_PRODUCTS}>
