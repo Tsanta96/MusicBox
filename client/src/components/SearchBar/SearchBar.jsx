@@ -61,7 +61,7 @@ class SearchBar extends React.Component {
                 onChange={(e) => this.setState({ searchText: e.currentTarget.value })}/>
               </form>
             </div>
-            <div className="magnifier-box">
+            <div className="magnifier-box" onClick={this.handleSearch}>
               <FontAwesomeIcon
                 icon={faSearch}
                 color="black"
