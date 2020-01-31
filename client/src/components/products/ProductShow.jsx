@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from "@apollo/react-hooks";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import { FETCH_PRODUCT } from '../../graphql/queries';
+import "./productShow.scss";
 const ProductShow = props => {
     const { loading: showLoading, error: showError, data: showData } = useQuery(FETCH_PRODUCT, {
         variables: { productId: props.match.params.productId }
@@ -22,22 +23,35 @@ const ProductShow = props => {
             />
             <div className="name-rating-description-column">
               <p className="full-prod-name">{product.name}</p>
+              <div className="one-em"></div>
               {product.seller && (
-                <p className="seller-info">{`by ${product.seller}`}</p>
+                <div className="row">
+                  <p className="prod-show-by">by</p>
+                  <p className="seller-info">{`${product.seller.name.toUpperCase()}`}</p>
+                </div>
               )}
               <div className="ratings"></div>
               <div className="full-prod-price-red">
                 <p className="full-prod-price-label">Price:</p>
                 <p className="full-prod-price-nums">{`$${product.price}`}</p>
-                <p className="full-prod-desc">{product.description}</p>
-                <p className="full-prod-weight">{product.weight.toString()}</p>
               </div>
+              <p className="desc-label">Description:</p>
+              <p className="full-prod-desc">{product.description}</p>
+              <p className="desc-label">Weight:</p>
+              <p className="full-prod-weight">{`${product.weight.toString()} lbs.`}</p>
             </div>
             <div className="buy-box">
-              <p className="In Stock."></p>
+              <p className="in-stock">In Stock</p>
               <div className="prod-quantity-box"></div>
-              <button className="add-to-cart-btn">Add to Cart</button>
-              <button className="buy-btn">Buy Now</button>
+              <div className="icon-btn">
+                <button className="add-to-cart-btn">Add to Cart</button>
+                <div className="buy-cart-icon"></div>
+              </div>
+
+              <div className="icon-btn">
+                <button className="buy-btn">Buy Now</button>
+                <div className="buy-icon"></div>
+              </div>
             </div>
           </div>
         );

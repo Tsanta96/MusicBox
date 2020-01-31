@@ -98,7 +98,6 @@ const verifyUser = async data => {
       });
 
       const loggedIn = fullUser ? true : false;
-      console.log("Name of fullUser", fullUser.name);
       return { loggedIn, _id: id, name: fullUser.name, email: fullUser.email };
     } catch (err) {
       return { loggedIn: false };
