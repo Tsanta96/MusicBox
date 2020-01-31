@@ -74,7 +74,6 @@ class ProductUpload extends React.Component {
                                     onSubmit={e => {
                                         e.preventDefault();
                                         const errorIndices = this.checkErrors();
-                                        console.log("errorIndices", errorIndices);
                                         if (errorIndices.length > 0){
                                             this.renderErrors(errorIndices)
                                         } else {

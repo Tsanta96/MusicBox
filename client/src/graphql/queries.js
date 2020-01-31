@@ -42,6 +42,7 @@ export const IS_LOGGED_IN = gql`
            name @client
            email @client
            cart @client {
+             _id
              products {
                name
                _id

@@ -39,7 +39,9 @@ export const ADD_TO_CART = gql `
         name
       }
       products {
+        _id
         name
+        price
       }
     }
   }
