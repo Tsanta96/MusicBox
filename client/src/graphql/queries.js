@@ -104,6 +104,27 @@ export const PRODUCTS_BY_CATEGORY_BY_NAME = gql`
       }
     `;
 
+export const FETCH_PRODUCT_BY_NAME_OR_DESCRIPTION = gql `
+query fetchProductByNameOrDescription($searchText: String!){
+  productByNameOrDescription(searchText: $searchText){
+    _id,
+    name,
+    imageUrl,
+    weight,
+    price,
+    description,
+    seller {
+      name,
+      _id
+    },
+    category {
+      name,
+      _id
+    }
+  }
+}
+`;
+
 // export const FULL_USER = gql `
 //   query fullUser {
 //     name @client,
