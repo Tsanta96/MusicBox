@@ -9,8 +9,7 @@ const ProductType = new GraphQLObjectType({
     name: { type: GraphQLString },
     category: { 
         type: require("./category_type"),
-        resolver(parentValue){
-            console.log("product_type.js hit it?");
+        resolve(parentValue){
             return Product.findById(parentValue._id)
                 .populate("category")
                 .then(product => (product.category))
@@ -18,7 +17,7 @@ const ProductType = new GraphQLObjectType({
     },
     seller: {
         type: require("./user_type"),
-        resolver(parentValue){(
+        resolve(parentValue){(
           Product.findById(parentValue._id)
               .populate("user")
               .then(product => (product.seller))

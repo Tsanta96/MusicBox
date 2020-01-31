@@ -52,7 +52,6 @@ if (token) {
     // user is loggedIn
     .mutate({ mutation: VERIFY_USER, variables: { token } })
     .then(({ data }) => {
-      console.log("Data from verifyUser", data);
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
@@ -63,7 +62,6 @@ if (token) {
       });
       client.query({ query: FIND_USER_CART, variables: { userId: data.verifyUser._id}})
       .then(({data}) => {
-        console.log("second data", data);
         cache.writeData({
           data: {
             cart: data.cart

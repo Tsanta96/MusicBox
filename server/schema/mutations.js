@@ -9,6 +9,7 @@ const Product = mongoose.model("product");
 const UserType = require("./types/user_type");
 const CartType = require("./types/cart_type");
 const Cart = mongoose.model("cart");
+const s3Type = require("./types/s3_type");
 const AuthService = require("../services/auth");
 const aws = require('aws-sdk');
 
@@ -152,13 +153,12 @@ const mutation = new GraphQLObjectType({
             }
         },
         signS3: {
-            type: ProductType,
+            type: s3Type,
             args: {
                 filename: { type: GraphQLString },
                 filetype: { type: GraphQLString }
             },
-            async resolve(parent, { filename, filetype }) {
-                console.log("filename", filename);
+            async resolve(parent, {filename, filetype}) {
                 aws.config.update({
                     accessKeyId: keys.iam_access_id,
                     secretAccessKey: keys.iam_secret,
