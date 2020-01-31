@@ -8,9 +8,13 @@ class SearchBar extends React.Component {
         super(props);
         this.state = {
             category: "All",
-            showDropdown: false
+            showDropdown: false,
+            searchText: ""
         }
     }
+  handleSearch = () => {
+    this.props.history.push(`/search/${this.state.searchText}`);
+  }
     render(){
         const capitalize = (word) => {
             const firstLetter = word[0].toUpperCase();
@@ -52,7 +56,10 @@ class SearchBar extends React.Component {
               </div>
             </div>
             <div className="search-input">
-              <input className="search-text" type="text" />
+              <form onSubmit={this.handleSearch}>
+                <input className="search-text" type="text" value={this.state.searchText}
+                onChange={(e) => this.setState({ searchText: e.currentTarget.value })}/>
+              </form>
             </div>
             <div className="magnifier-box">
               <FontAwesomeIcon
