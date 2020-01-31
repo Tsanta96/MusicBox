@@ -159,16 +159,18 @@ const mutation = new GraphQLObjectType({
                 filetype: { type: GraphQLString }
             },
             async resolve(parent, {filename, filetype}) {
+                console.log("filename", filename);
+                console.log("filetype", filetype);
                 aws.config.update({
                     accessKeyId: keys.iam_access_id,
                     secretAccessKey: keys.iam_secret,
-                    region: 'us-east-2'
+                    region: 'us-west-1'
                 });
                 // AWS_ACCESS_KEY_ID
                 // AWS_SECRET_ACCESS_KEY
                 const s3 = new aws.S3({
                     signatureVersion: 'v4',
-                    region: 'us-east-2',
+                    region: 'us-west-1',
                 });
 
                 const s3Params = {
