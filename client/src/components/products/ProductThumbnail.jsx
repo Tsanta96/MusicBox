@@ -1,5 +1,6 @@
 import React from 'react';
 import './productThumbnail.scss';
+import { withRouter } from 'react-router-dom';
 const ProductThumbNail = props => {
     const priceFormat = price => {
         const priceSplit = price.split(".");
@@ -12,7 +13,7 @@ const ProductThumbNail = props => {
         )
     };
     return (
-      <div className="product-thumbnail">
+      <div className="product-thumbnail" onClick={() => props.history.push(`/products/${props.id}`)}>
         {props.imageUrl && (
           <div className="product-img-container">
             <img
@@ -30,4 +31,4 @@ const ProductThumbNail = props => {
     );
 }
 
-export default ProductThumbNail;
+export default withRouter(ProductThumbNail);

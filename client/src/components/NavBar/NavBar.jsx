@@ -11,7 +11,6 @@ const NavBar = props => {
       {client => (
         <Query query={IS_LOGGED_IN}>
           {({ data, loading, error }) => {
-            console.log("new Data", data);
             if (loading) return <div>Loading...</div>;
             if (error) return <div></div>;
             if (data.isLoggedIn) {
