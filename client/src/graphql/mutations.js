@@ -69,14 +69,19 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
-// export const CREATE_PRODUCT = gql `
-//   mutation CreateProduct($name: String!, $description: String!, $category: ID!, $seller: ID!, $inventoryAmount: Int!) {
-//     newProduct(name: $name, description: $description, category: $category, seller: $seller, inventoryAmount: $inventoryAmount) {
-//       _id
-//     }
-//   }
-// `;
+export const CREATE_PHOTO = gql `
+  mutation($name: String!, $pictureUrl: String!) {
+      createChampion(name: $name, pictureUrl: $pictureUrl) {
+        id
+      }
+  }
+`;
 
-// name: "testproduct", category: "instruments", description: "this is a test product", seller: "5e309ec1c4581c97b85fcd89", inventoryAmount: 43, price: 100, weight: 5, productImageUrl: "testproduct.com"
-    
-// name: "testproduct", description: "this is a test product", weight: 5, price: 100
+export const S3_SIGN = gql `
+  mutation($filename: String!, $filetype: String!) {
+      signS3(filename: $filename, filetype: $filetype) {
+        url
+        signedRequest
+      }
+  }
+`;

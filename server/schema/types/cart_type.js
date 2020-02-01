@@ -11,7 +11,7 @@ const CartType = new GraphQLObjectType({
     _id: { type: GraphQLID },
     user: {
         type: require("./user_type"),
-        resolver(parentValue){(
+        resolve(parentValue){(
             Cart.findById(parentValue._id)
                 .populate("user")
                 .then(cart => (cart.user))
