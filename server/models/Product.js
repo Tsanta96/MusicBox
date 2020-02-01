@@ -53,6 +53,10 @@ const ProductSchema = new Schema({
   }
 });
 
+ProductSchema.index({'$**': 'text'});
+
+
+
 ProductSchema.statics.updateProductCategory = (productId, categoryId) => {
   // console.log(1, productId, categoryId); //categoryID is in 'single ticks'
   const Product = mongoose.model("product");

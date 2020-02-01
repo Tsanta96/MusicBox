@@ -15,6 +15,27 @@ export const FETCH_PRODUCTS = gql `
   }
 `;
 
+export const FETCH_PRODUCT = gql `
+query fetchProduct($productId: ID!){
+  product(_id: $productId){
+    _id,
+    name,
+    imageUrl,
+    weight,
+    price,
+    description,
+    seller {
+      name,
+      _id
+    },
+    category {
+      name,
+      _id
+    }
+  }
+}
+`
+
 export const IS_LOGGED_IN = gql`
          query IsUserLoggedIn {
            isLoggedIn @client
@@ -82,6 +103,27 @@ export const PRODUCTS_BY_CATEGORY_BY_NAME = gql`
       }
       }
     `;
+
+export const FETCH_PRODUCT_BY_NAME_OR_DESCRIPTION = gql `
+query fetchProductByNameOrDescription($searchText: String!){
+  productByNameOrDescription(searchText: $searchText){
+    _id,
+    name,
+    imageUrl,
+    weight,
+    price,
+    description,
+    seller {
+      name,
+      _id
+    },
+    category {
+      name,
+      _id
+    }
+  }
+}
+`;
 
 // export const FULL_USER = gql `
 //   query fullUser {

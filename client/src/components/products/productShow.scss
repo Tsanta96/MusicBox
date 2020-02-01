@@ -1,0 +1,144 @@
+.buy-cart-icon {
+    background-image: url('./sprite.png');
+    background-size: 400px 900px;
+    background-position: -35px -5px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: top;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    left: 2px;
+    top: 6px;
+}
+
+.add-to-cart-btn {
+    background-color: #f0c14b;
+    border-top: 1px solid rgb(168, 135, 52);
+    border-right: 1px solid rgb(156, 126, 49);
+    border-bottom: 1px solid rgb(132, 106, 41);
+    border-left: 1px solid rgb(156, 126, 49);
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Amazon Ember';
+    padding: 8px 60px;
+    margin-bottom: 2em;
+}
+
+.buy-btn {
+background: rgb(241,170,67);
+font-family: 'Amazon Ember';
+color: #111;
+text-align: center;
+vertical-align: middle;
+padding: 8px 70px;
+box-sizing: border-box;
+border: 1px solid rgb(168, 135, 52);
+position: relative;
+}
+
+.icon-btn {
+    position: relative;
+}
+
+.buy-icon {
+    width: 25px;
+    height: 25px;
+    background-position: -35px -60px;
+    background-image: url('./sprite.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-size: 400px 900px;
+    vertical-align: top;
+    position: absolute;
+    left: 2px;
+    top: 6px;
+}
+
+.product-show {
+    display: flex;
+    padding: 2% 0% 3% 1%;
+}
+
+.name-rating-description-column {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+.buy-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-prod-img {
+    width: 45vw;
+    height: 80vh;
+    object-fit: contain;
+}
+
+.product-thumbnail {
+    margin-bottom: 30px;
+}
+
+.full-prod-name {
+    font-family: 'Amazon Ember';
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.seller-info {
+    color: blue;
+    margin-left: 5px;
+}
+
+.one-em {
+    height: .5em;
+}
+
+.ratings {
+    border-bottom: 1px solid rgb(231,231,231);
+}
+
+.full-prod-price-red {
+    margin-top: .5em;
+    display: flex;
+}
+
+.full-prod-price-label {
+   color: rgb(177,50,33);
+   font-family: 'Amazon Ember';
+   font-size: 16px;
+}
+
+.full-prod-price-nums {
+    color: rgb(177,50,33);
+   font-family: 'Amazon Ember';
+   font-size: 17px;
+   font-weight: bold;
+   margin-left: 6px;
+}
+
+.desc-label {
+    font-weight: bold;
+    font-family: 'Amazon Ember';
+    margin-top: .5em;
+}
+
+.full-prod-desc {
+    
+}
+
+.in-stock {
+    color: rgb(55,119,4);
+    font-family: 'Amazon Ember';
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+.buy-box {
+    border: 1px solid rgb(231,231,231);
+    padding: 2%;
+    margin-left: 10%;
+    height: 75%;
+}

@@ -12,6 +12,7 @@ const CategoryType = new GraphQLObjectType({
     products: {
         type: new GraphQLList(require("./product_type")),
         resolve(parentValue) {
+          console.log("we are queryig products");
           return Category.findProducts(parentValue._id);
         }
     }

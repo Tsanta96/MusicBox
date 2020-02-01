@@ -62,6 +62,13 @@ const RootQueryType = new GraphQLObjectType({
           .populate("products")
       }
     },
+    productByNameOrDescription: {
+      type: new GraphQLList(ProductType),
+      args: { searchText: { type: GraphQLString }},
+      resolve(_, { searchText }){
+        return Product.find({ $text: { $search: searchText } }).populate("category").then(products => products).catch(e => console.log(e));
+      }
+    },
     carts: {
       type: new GraphQLList(CartType),
       resolve() {
