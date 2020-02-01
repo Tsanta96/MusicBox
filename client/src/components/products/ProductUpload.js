@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import uuidv1 from 'uuid/v1';
-import { Query, Mutation, ApolloConsumer, useMutation } from 'react-apollo';
+import { Query, Mutation, ApolloConsumer } from 'react-apollo';
 import { CREATE_PRODUCT, CREATE_PHOTO, S3_SIGN } from '../../graphql/mutations';
+import {useQuery, useMutation} from '@apollo/react-hooks';
 import { FETCH_CATEGORIES, FETCH_USER } from '../../graphql/queries';
 import Dropzone from 'react-dropzone';
 import '../../stylesheets/product_upload.scss';
@@ -23,6 +24,8 @@ function ProductUpload() {
 
     const [s3Sign, { s3SignData }] = useMutation(S3_SIGN);
     const [createPhoto, { createPhotoData }] = useMutation(CREATE_PHOTO);
+    const [createProduct, { createProductData }] = useMutation(CREATE_PRODUCT);
+    const { loading: fetchUserLoading, error: fetchUserError, data: fetchUserData } = useQuery(FETCH_USER);
 
     const setState = () => {
         state = [name, category, description, parseInt(inventoryAmount, 10), parseInt(price, 10), parseInt(weight, 10), imageUrl];
@@ -30,10 +33,22 @@ function ProductUpload() {
     }
 
     useEffect(() => {
-        if (imageUrl.includes("https://musicbox-products.s3.amazonaws.com")){
-           console.log("In useEffect", setState());
+        if (awsUrl.includes("https://musicbox-products.s3.amazonaws.com")){
+           console.log("awsUrl", awsUrl);
+           createProduct({                                     
+                variables: {
+                    name: name,
+                    description: description,
+                    category: category,
+                    seller: fetchUserData.currentUser,
+                    inventoryAmount: inventoryAmount,
+                    price: price,
+                    weight: weight,
+                    imageUrl: awsUrl
+                }
+            });
         }
-    }, [imageUrl]);
+    }, [awsUrl]);
 
     const checkErrors = () => {
         let errorIndices = [];
@@ -41,7 +56,6 @@ function ProductUpload() {
         state.forEach((val, idx) => {
             if (val === "" || val === 0) errorIndices.push(idx);
         });
-        console.log(errorIndices);
         return errorIndices;
     }
 
@@ -96,7 +110,6 @@ function ProductUpload() {
     const onDrop = async (files) => {
         setPhoto(files[0]);
         setImageUrl(files[0].name);
-        // uploadFile();
     };
 
     const uploadToS3 = async (photo, signedRequest) => {
@@ -124,22 +137,12 @@ function ProductUpload() {
 
         const { signedRequest, url } = response.data.signS3;
 
-        // await updateImageState(url);
-
-        console.log("AWS url: ", url);
-
         setAwsUrl(url);
 
         await uploadToS3(photo, signedRequest);
 
-        console.log(setState());
-
         return setState();
     }
-
-    // const updateImageState = async (url) => {
-    //     await setImageUrl(url);
-    // }
 
     return(
         <ApolloConsumer> 
@@ -148,38 +151,19 @@ function ProductUpload() {
                 if (!user) return <div>Loading...</div>
                 
                 return (
-                    <Mutation 
-                        mutation={CREATE_PRODUCT}
-                    >
-                    {createProduct => (
                     <div>
                         <h1 className="list-your-product">List Your Product!</h1>
                         <div className="product-upload-form-container">
                             <form
                                 onSubmit={e => { 
                                     e.preventDefault();
-                                    // setState();
                                     const errorIndices = checkErrors();
-                                    console.log("errorIndices", errorIndices);
                                     if (errorIndices.length > 0){
                                         renderErrors(errorIndices)
                                     } else { 
-                                        uploadFile().then(() => {
-                                        debugger;
-                                        createProduct({
-                                            variables: {
-                                                name: name,
-                                                description: description,
-                                                category: category,
-                                                seller: user.currentUser,
-                                                inventoryAmount: inventoryAmount,
-                                                price: price,
-                                                weight: weight,
-                                                imageUrl: awsUrl
-                                            }
-                                        });
-                                    })
-                                }}}
+                                        uploadFile()
+                                    }
+                                }}
                             >   
                                 <div className="left-and-right-side-upload">
                                     <div className="left-side-upload">
@@ -197,7 +181,6 @@ function ProductUpload() {
                                             <br></br>
                                                 <Query query={FETCH_CATEGORIES}
                                                 onCompleted={data => {
-                                                    console.log("DATA", data);
                                                     setCategory( data.categories[0]._id )
                                                 }}
                                                 >
@@ -296,8 +279,7 @@ function ProductUpload() {
                         </div>
                     </div>
                     )}
-                </Mutation>
-                )}}
+                }
         </ApolloConsumer>
     )
 }
