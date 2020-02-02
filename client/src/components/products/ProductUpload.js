@@ -47,8 +47,18 @@ function ProductUpload() {
                     imageUrl: awsUrl
                 }
             });
+            clearState();
         }
     }, [awsUrl]);
+
+    const clearState = () => {
+        setName("");
+        setDescription("");
+        setInventoryAmount(0);
+        setPrice(0);
+        setWeight(0);
+        setImageUrl("");
+    }
 
     const checkErrors = () => {
         let errorIndices = [];
