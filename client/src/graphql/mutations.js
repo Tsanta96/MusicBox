@@ -41,7 +41,10 @@ export const ADD_TO_CART = gql `
       products {
         _id
         name
-        price
+        price,
+        imageUrl,
+        description,
+        weight
       }
     }
   }

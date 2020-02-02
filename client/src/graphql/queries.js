@@ -44,9 +44,12 @@ export const IS_LOGGED_IN = gql`
            cart @client {
              _id
              products {
-               name
-               _id
-               price
+               name,
+               _id,
+               price,
+               imageUrl,
+               description,
+               weight
              }
            }
          }
@@ -68,7 +71,10 @@ export const FIND_USER_CART = gql `
         products{
           name,
           _id,
-          price
+          price,
+          description,
+          weight,
+          imageUrl
         }
         user {
           _id
