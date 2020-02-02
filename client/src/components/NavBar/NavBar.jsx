@@ -35,6 +35,9 @@ const NavBar = props => {
                           <Link to="#">Your Orders</Link>
                         </li>
                         <li>
+                          <Link to="/upload">List a Product</Link>
+                        </li>
+                        <li>
                           <button
                             onClick={e => {
                               e.preventDefault();
@@ -74,9 +77,6 @@ const NavBar = props => {
                         <h1 className="account-dropdown-header">
                           Sign In
                         </h1>
-                        <li>
-                          <Link to="/login"><div className="login-btn">Login</div></Link>
-                        </li>
                         <li>
                           <Link to="/register"><div className="register-btn">Register</div></Link>
                         </li>

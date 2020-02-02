@@ -22,6 +22,8 @@
   "homepage": "https://github.com/Tsanta96/MusicBox#readme",
   "dependencies": {
     "apollo-server": "^2.9.16",
+    "aws-sdk": "^2.610.0",
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.0.2",
@@ -34,7 +36,9 @@
     "mongoose": "^5.8.9",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.2",
+    "react-dropzone": "^10.2.1",
     "react-router-dom": "^5.1.2",
+    "uuid": "^3.4.0",
     "validator": "^12.1.0"
   }
 }

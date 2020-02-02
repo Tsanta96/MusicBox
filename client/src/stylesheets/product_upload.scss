@@ -22,7 +22,7 @@ $off-white: rgb(238, 238, 238);
     border: 1px solid black;
     border-radius: 7px;
     width: 70%; 
-    height: 410px;
+    height: 420px;
     margin: 0 auto;
     font-family: amazon-font;
     color: white;
@@ -71,6 +71,7 @@ $off-white: rgb(238, 238, 238);
     }
     textarea {
         border: 1px solid black;
+        border-radius: 2px;
         background-color: $off-white;
         width: 85%;
         height: 30%;
@@ -114,15 +115,25 @@ $off-white: rgb(238, 238, 238);
         height: 80%;
         margin-left: 20px;
         margin-top: 20px;
+        .dropzone {
+            margin: 0 auto;
+            width: 60%;
+            margin-top: 20px;
+            margin-left: 50px;
+            border: 1px dashed white;
+            cursor: pointer;
+            padding: 10% 10%;
+            font-size: 15px;
+            text-align: center;
+            overflow: auto;
+        }
     }
 }
 
-
-
 .upload-button {
     text-align: right;
-    margin-right: 25px;
-    margin-top: 25px;
+    margin-right: 15px;
+    margin-top: 30px;
 
     button {
         font-size: 23px;
@@ -135,7 +146,21 @@ $off-white: rgb(238, 238, 238);
 
     button:hover {
         background-image: linear-gradient(rgb(255, 188, 64), orange);
-        // background-color: orange;
         color: #232e3e;
     }
+}
+
+.product-upload-errors-and-upload-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.product-upload-errors {
+    margin-top: 20px;
+    color: black;
+    font-size: 11.5px;
+    width: 180px;
+    color: orange;
+
 }
