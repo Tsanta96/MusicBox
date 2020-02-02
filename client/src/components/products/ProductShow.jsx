@@ -1,14 +1,29 @@
 import React from 'react';
 import { useQuery } from "@apollo/react-hooks";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
-import { FETCH_PRODUCT } from '../../graphql/queries';
+import { FETCH_PRODUCT, IS_LOGGED_IN, FIND_USER_CART } from '../../graphql/queries';
+import { ADD_TO_CART } from '../../graphql/mutations';
+import { useMutation } from '@apollo/react-hooks';
 import "./productShow.scss";
 const ProductShow = props => {
     const { loading: showLoading, error: showError, data: showData } = useQuery(FETCH_PRODUCT, {
         variables: { productId: props.match.params.productId }
     });
-    console.log("This is showData", showData);
-    if (showLoading){
+  const { loading: loggedInLoading, error: loggedInError, data: isLoggedIn } = useQuery(IS_LOGGED_IN)
+  const [addToCart] = useMutation(ADD_TO_CART, {
+    update(cache, {data: { addToCart }}){
+      console.log("This is the cart", addToCart);
+      cache.writeQuery({
+        query: IS_LOGGED_IN,
+        data: { cart: addToCart }
+      })
+    }
+  });
+  const handleAddToCart = () => {
+    addToCart({ variables: { productId: props.match.params.productId, cartId: isLoggedIn.cart._id }})
+    .then(() => props.history.push("/newItems")).catch(e => console.log(e));
+  }
+    if (showLoading || loggedInLoading){
         return <LoadingIcon />
     } else if (showError){
         return <div>Sorry there was an error</div>
@@ -44,7 +59,7 @@ const ProductShow = props => {
               <p className="in-stock">In Stock</p>
               <div className="prod-quantity-box"></div>
               <div className="icon-btn">
-                <button className="add-to-cart-btn">Add to Cart</button>
+                <button className="add-to-cart-btn" onClick={handleAddToCart}>Add to Cart</button>
                 <div className="buy-cart-icon"></div>
               </div>
 

@@ -1,0 +1,86 @@
+.check-icon {
+    background-image: url('../../products/sprite.png');
+    background-size: 400px 900px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: top;
+    background-position: -318px -35px;
+    height: 27px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.sml-cart-img {
+    height: 48px;
+    width: 48px;
+}
+
+.first-box {
+    background-color: rgb(250,250,250);
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(204,204,204);
+    padding: .7em .5em .7em .5em;
+}
+
+.second-box {
+    background-color: rgb(243,243,243);
+    display: flex;
+    align-items: center;
+    padding: .7em .5em .7em .5em;
+    border: 1px solid rgb(204,204,204);
+    width: 100%;
+}
+
+.cart-row {
+    display: flex;
+    width: 75%;
+    margin: 5% 12.5% 10% 12.5%;
+}
+
+.new-items {
+    width: 100%;
+}
+
+.green-add-cart {
+    color: rgb(72,152,8);
+    font-family: 'Amazon Ember';
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.cart-header-new {
+    font-weight: bold;
+    font-family: 'Amazon Ember';
+    font-size: 17px;
+    margin-left: 5px;
+}
+
+.price-red-new {
+    color: rgb(177,50,33);
+    font-family: 'Amazon Ember';
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 7px;
+}
+
+.outline-btn {
+    border: 1px solid rgb(162,166,172);
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    white-space: nowrap;
+    display: block;
+    cursor: pointer;
+    margin-left: 20%;
+    font-family: 'Amazon Ember';
+}
+
+.proceed-btn {
+    background-color: rgb(242,200,95);
+    font-family: 'Amazon Ember';
+    padding: 10px;
+    margin-left: 20px;
+    border: 1px solid rgb(168,135,52);
+    font-size: 16px;
+}

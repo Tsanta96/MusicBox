@@ -12,7 +12,8 @@ class SearchBar extends React.Component {
             searchText: ""
         }
     }
-  handleSearch = () => {
+  handleSearch = (e) => {
+    e.preventDefault();
     this.props.history.push(`/search/${this.state.searchText}`);
   }
     render(){
