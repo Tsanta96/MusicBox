@@ -12,7 +12,6 @@ const ProductShow = props => {
   const { loading: loggedInLoading, error: loggedInError, data: isLoggedIn } = useQuery(IS_LOGGED_IN)
   const [addToCart] = useMutation(ADD_TO_CART, {
     update(cache, {data: { addToCart }}){
-      console.log("This is the cart", addToCart);
       cache.writeQuery({
         query: IS_LOGGED_IN,
         data: { cart: addToCart }

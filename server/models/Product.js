@@ -58,28 +58,21 @@ ProductSchema.index({'$**': 'text'});
 
 
 ProductSchema.statics.updateProductCategory = (productId, categoryId) => {
-  // console.log(1, productId, categoryId); //categoryID is in 'single ticks'
   const Product = mongoose.model("product");
   const Category = mongoose.model("category");
 
   return Product.findById(productId).then(product => {
-    // console.log(2, "product name -->", product.name);
-    // if the product already had a category
     if (product.category) {
-      // find the old category and remove this product from it's products
-      // console.log(3, "product category --->", product.category);
       Category.findById(product.category).then(oldcategory => {
-        // console.log(4, oldcategory);
         oldcategory.products.pull(product);
         return oldcategory.save();
       });
     }
     //  find the Category and push this product in, as well as set this product's category
     return Category.findById(categoryId).then(newCategory => {
-      // console.log(5, newCategory);
       product.category = newCategory;
       newCategory.products.push(product);
-      // console.log("product: ", product.name, "category products: ", newCategory.products);
+
 
       return Promise.all([product.save(), newCategory.save()]).then(
         ([product, newCategory]) => product

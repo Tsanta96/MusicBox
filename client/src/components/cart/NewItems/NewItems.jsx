@@ -9,7 +9,6 @@ const NewItems = props => {
         const result = products.reduce((acc, currentValue, ) => {
             return acc + currentValue.price
         }, 0);
-        console.log(result);
         return result;
     }
     return <ApolloConsumer>
@@ -19,7 +18,6 @@ const NewItems = props => {
                     if (loading) return <div>Loading...</div>;
                     if (error) return <div></div>;
                     if (data.cart){
-                        console.log(data);
                         const lastProduct = data.cart.products[data.cart.products.length-1];
                         return (
                             <div>
@@ -63,16 +61,6 @@ const NewItems = props => {
                                         </button>
                                     </div>
                                 </div>
-                                {/* <div>
-                                    <ul>
-                                        {console.log(data.cart.products[0])}
-                                        {data.cart.products.map((prod) => (
-                                            <li>
-                                                <h1>{prod.name}</h1>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div> */}
                             </div>
                         )
                     } else {

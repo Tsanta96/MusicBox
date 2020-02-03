@@ -29,7 +29,6 @@ const register = async data => {
       );
   
       user.save();
-      console.log("USER", user);
       // we'll create a token for the user
       const token = jwt.sign({ id: user._id }, keys.secretOrKey);
   
@@ -88,7 +87,7 @@ const verifyUser = async data => {
       const { token } = data;
       // we decode the token using our secret password to get the
       // user's id
-      const decoded = jwt.verify(token, keys.secretOrKey);
+      const decoded = jwt.verify(token, process.env.secretOrKey);
       const { id } = decoded;
   
       // then we try to use the User with the id we just decoded

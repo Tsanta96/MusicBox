@@ -17,8 +17,19 @@ const cache = new InMemoryCache({
     dataIdFromObject: object => object._id || null
 });
 
+let uri;
+
+if (process.env.NODE_ENV === "production") {
+  uri = `/graphql`;
+} else {
+  uri = "http://localhost:5000/graphql";
+}
+
 const httpLink = createHttpLink({
-    uri: "http://localhost:5000/graphql"
+  uri,
+  headers: {
+    authorization: localStorage.getItem("auth-token")
+  }
 });
 
 const errorLink = onError(({ graphQLErrors }) => {
@@ -62,7 +73,6 @@ if (token) {
       });
       client.query({ query: FIND_USER_CART, variables: { userId: data.verifyUser._id}})
       .then(({data}) => {
-        console.log(data);
         cache.writeData({
           data: {
             cart: data.cart

@@ -34,7 +34,6 @@ function ProductUpload() {
 
     useEffect(() => {
         if (awsUrl.includes("https://musicbox-products.s3.amazonaws.com")){
-           console.log("awsUrl", awsUrl);
            createProduct({                                     
                 variables: {
                     name: name,
