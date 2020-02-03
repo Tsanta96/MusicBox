@@ -102,3 +102,23 @@ export const S3_SIGN = gql `
       }
   }
 `;
+
+export const DELETE_FROM_CART = gql `
+mutation myDeleteFromCart($itemCartIdx: Int!, $cartId: ID!){
+  deleteFromCart(itemCartIdx: $itemCartIdx, cartId: $cartId){
+     _id
+      user {
+        _id
+        name
+      }
+      products {
+        _id
+        name
+        price,
+        imageUrl,
+        description,
+        weight
+      }
+  }
+}
+`

@@ -111,6 +111,16 @@ const mutation = new GraphQLObjectType({
                 return Cart.addToCart(productId, cartId)
             }
         },
+        deleteFromCart: {
+            type: CartType,
+            args: {
+                itemCartIdx: { type: GraphQLInt },
+                cartId: { type: GraphQLID }
+            },
+            resolve(_, { itemCartIdx, cartId } ){
+                return Cart.deleteFromCart(itemCartIdx, cartId);
+            }
+        },
         register: {
             type: UserType,
             args: {

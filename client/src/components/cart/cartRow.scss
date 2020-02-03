@@ -1,0 +1,38 @@
+.cart-row-img {
+    height: 180px;
+    width: 180px;
+}
+
+.prod-title-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-row-title {
+    color: rgb(12,102,192);
+    font-family: 'Amazon Ember';
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.delete-item {
+    color: rgb(12,102,192);
+    font-size: 12px;
+    font-family: 'Amazon Ember';
+    cursor: pointer;
+}
+
+.carts-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.some-empty-space {
+    height: 1em;
+    border-bottom: 1px solid rgb(221,221,221);
+}
+
+.better-way {
+    margin-top: 2em;
+}
