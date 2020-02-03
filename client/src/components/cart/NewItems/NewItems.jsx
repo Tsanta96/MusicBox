@@ -3,6 +3,7 @@ import { Query } from "react-apollo";
 import { IS_LOGGED_IN, FIND_USER_CART } from '../../../graphql/queries';
 import { ApolloConsumer } from "react-apollo";
 import './newItems.scss';
+import { withRouter } from 'react-router-dom';
 const NewItems = props => { 
     const cartSum = products => {
         const result = products.reduce((acc, currentValue, ) => {
@@ -37,7 +38,7 @@ const NewItems = props => {
                                         <p className="price-red-new">
                                             {`$${cartSum(data.cart.products).toFixed(2)}`}
                                         </p>
-                                        <button className="outline-btn">
+                                        <button className="outline-btn" onClick={() => props.history.push("/cart")}>
                                             Cart
                                         </button>
                                         <button className="proceed-btn">
@@ -59,6 +60,6 @@ const NewItems = props => {
     </ApolloConsumer>
 }
 
-export default NewItems;
+export default withRouter(NewItems);
 
 

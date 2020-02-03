@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import { ApolloConsumer } from "react-apollo";
 import {IS_LOGGED_IN } from "../../graphql/queries";
@@ -16,7 +16,7 @@ const NavBar = props => {
             if (data.isLoggedIn) {
               return (
                 <div className="navbar">
-                  <h1 className="white">musicbox</h1>
+                  <h1 className="white" onClick={() => props.history.push("/")}>musicbox</h1>
                   <SearchBar />
                   <div className="nav-user-name">
                     <p className="nav-user-only-name">{`Hello, ${data.name}`}</p>
@@ -52,7 +52,7 @@ const NavBar = props => {
                       </ul>
                     </div>
                   </div>
-                  <div className="shopping-cart">
+                  <div className="shopping-cart" onClick={() => props.history.push("/cart")}>
                     <p className="nav-number-items-in-cart">{data.cart ? data.cart.products.length.toString() : "0"}</p>
                     <span className="cart-icon"></span>
                   </div>
@@ -100,4 +100,4 @@ const NavBar = props => {
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);

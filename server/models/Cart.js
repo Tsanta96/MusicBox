@@ -31,4 +31,12 @@ CartSchema.statics.addToCart = (productId, cartId) => {
     });
 };
 
+CartSchema.statics.deleteFromCart = (itemNum, cartId) => {
+    const Cart = mongoose.model("cart");
+    return Cart.findById(cartId).then(cart => {
+        cart.products.splice(itemNum, 1);
+        return cart.save().then(cart => cart);
+    })
+};
+
 module.exports = mongoose.model("cart", CartSchema);

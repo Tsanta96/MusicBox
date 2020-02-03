@@ -1,0 +1,62 @@
+.cart-head-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(221,221,221);
+    padding-bottom: 10px;
+}
+
+.shopping-cart-header {
+    font-size: 21px;
+    font-family: 'Amazon Ember';
+    font-weight: bold;
+}
+
+.cart {
+    width: 100%;
+    display: flex;
+}
+
+.cart-col {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 2% 2% 5% 2%;
+    height: 100px;
+}
+
+.no-items {
+    font-family: 'Amazon Ember';
+    font-size: 23px;
+    font-weight: bold;
+    margin-top: 3em;
+}
+.cart-subtotal-col {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(243,243,243);
+    border: 1px sold rgb(221,221,221);
+    padding: 20px;
+    width: 20%;
+    box-sizing: border-box;
+}
+
+.sub-cart-row {
+    display: flex;
+    margin-bottom: 3em;
+}
+
+.subtotal-blk {
+    font-family: 'Amazon Ember';
+    font-weight: bold;
+}
+
+.cart-proceed-btn {
+    background-color: rgb(242,200,95);
+    font-family: 'Amazon Ember';
+    padding: 10px 15px;
+    border: 1px solid rgb(168,135,52);
+    font-size: 16px;
+    text-align: center;
+}
