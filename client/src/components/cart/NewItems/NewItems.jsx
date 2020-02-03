@@ -4,7 +4,6 @@ import { Query } from "react-apollo";
 import { IS_LOGGED_IN, FIND_USER_CART } from '../../../graphql/queries';
 import { ApolloConsumer } from "react-apollo";
 import './newItems.scss';
-import { withRouter } from 'react-router-dom';
 const NewItems = props => { 
     const cartSum = products => {
         const result = products.reduce((acc, currentValue, ) => {
