@@ -10,11 +10,14 @@ import ProductUpload from './products/ProductUpload';
 import NavBar from './NavBar/NavBar'
 import SearchIndex from './SearchIndex/SearchIndex';
 import ProductShow from './products/ProductShow';
+import OrderDisplay from './orders/orderDisplay';
+
 const App = () => {
   return (
     <div>
       <NavBar />
       <Switch>
+        <Route exact path="/orders" component={OrderDisplay} />
         <Route exact path="/upload" component={ProductUpload} />
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute

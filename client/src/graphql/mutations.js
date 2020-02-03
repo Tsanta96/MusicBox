@@ -57,6 +57,18 @@ export const CREATE_CART = gql`
   }
 `;
 
+export const CREATE_ORDER = gql`
+  mutation CreateOrder($userId: ID!) {
+    newOrder(userId: $userId) {
+      _id
+      user {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 export const CREATE_PRODUCT = gql`
   mutation CreateProduct($name: String!, $description: String!, $category: ID!, $seller: ID!, 
   $inventoryAmount: Int!, $price: Float!, $weight: Int!, $imageUrl: String) {

@@ -10,6 +10,8 @@ const Product = mongoose.model("product");
 const Category = mongoose.model("category");
 const Cart = mongoose.model("cart");
 const CartType = require("./cart_type");
+const Order = mongoose.model("order");
+const OrderType = require("./order_type");
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -84,6 +86,22 @@ const RootQueryType = new GraphQLObjectType({
         return Cart.find({ user: userId })
           .populate("products")
           .then(carts => carts[0]);
+      }
+    },
+    orders: {
+      type: new GraphQLList(OrderType),
+      args: { userId: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_, { userId }) {
+        return Order.find({ user: userId })
+          .populate("user")
+          .populate("products");
+      }
+    },
+    order: {
+      type: OrderType,
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_, args) {
+        return Order.findById(args._id);
       }
     }
   })
