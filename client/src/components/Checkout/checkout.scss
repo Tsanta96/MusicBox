@@ -1,0 +1,18 @@
+.shipping-address-form-header {
+    font-family: 'Amazon Ember';
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.checkout-form {
+    font-family: 'Amazon Ember';
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 5% 0% 3% 12.5%;
+    input {
+        border: 1px solid rgb(187,187,187);
+        padding: 5px;
+        margin: 10px 0px 10px 0px;
+    }
+}

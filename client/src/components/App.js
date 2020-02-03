@@ -12,6 +12,7 @@ import SearchIndex from './SearchIndex/SearchIndex';
 import ProductShow from './products/ProductShow';
 import NewItems from './cart/NewItems/NewItems';
 import Cart from './cart/cart';
+import Checkout from './Checkout/Checkout';
 const App = () => {
   return (
     <div>
@@ -30,6 +31,7 @@ const App = () => {
         <Route exact path="/products/:productId" component={ProductShow}/>
         <Route exact path="/newItems" component={NewItems} />
         <Route exact path="/cart" component={Cart} />
+        <AuthRoute exact path="/checkout" component={Checkout} routeType="protected" />
       </Switch>
     </div>
   );
