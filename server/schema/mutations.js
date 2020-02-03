@@ -9,6 +9,8 @@ const Product = mongoose.model("product");
 const UserType = require("./types/user_type");
 const CartType = require("./types/cart_type");
 const Cart = mongoose.model("cart");
+const OrderType = require("./types/order_type");
+const Order = mongoose.model("order");
 const s3Type = require("./types/s3_type");
 const AuthService = require("../services/auth");
 const aws = require('aws-sdk');
@@ -69,6 +71,15 @@ const mutation = new GraphQLObjectType({
             resolve(_, { userId }) {
                 return new Cart({ user: userId }).populate("user").save();
                 //return Cart.find({user: userId}).populate("user").then(cart => cart)
+            }
+        },
+        newOrder: {
+            type: OrderType,
+            args: {
+                userId: { type: GraphQLID }
+            },
+            resolve(_, { userId }) {
+                return new Order({ user: userId }).populate("user").save();
             }
         },
         deleteProduct: {

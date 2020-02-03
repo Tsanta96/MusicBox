@@ -84,6 +84,23 @@ export const FIND_USER_CART = gql `
     }
 `;
 
+export const FETCH_ORDERS = gql`
+  query fetchOrders($userId: ID!) {
+    orders(userId: $userId){
+      _id,
+      products{
+        name,
+        _id,
+        price
+      }
+      user {
+        _id
+        name
+      }
+    }
+  }
+`
+
 export const FETCH_USER = gql `
     query fetchUser {
       currentUser @client
