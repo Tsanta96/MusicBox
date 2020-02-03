@@ -62,6 +62,7 @@ if (token) {
       });
       client.query({ query: FIND_USER_CART, variables: { userId: data.verifyUser._id}})
       .then(({data}) => {
+        console.log(data);
         cache.writeData({
           data: {
             cart: data.cart

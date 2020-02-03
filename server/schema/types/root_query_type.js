@@ -85,7 +85,10 @@ const RootQueryType = new GraphQLObjectType({
       resolve(_, { userId }) {
         return Cart.find({ user: userId })
           .populate("products")
-          .then(carts => carts[0]);
+          .then(carts => {
+            console.log('no of products', carts[0].products.length)
+            return carts[0]
+          });
       }
     },
     orders: {
