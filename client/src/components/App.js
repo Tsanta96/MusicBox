@@ -11,6 +11,7 @@ import NavBar from './NavBar/NavBar'
 import SearchIndex from './SearchIndex/SearchIndex';
 import ProductShow from './products/ProductShow';
 import NewItems from './cart/NewItems/NewItems';
+import CartDisplay from './cart/CartDisplay';
 const App = () => {
   return (
     <div>
@@ -28,6 +29,7 @@ const App = () => {
         <Route exact path="/search/:category" component={SearchIndex} />
         <Route exact path="/products/:productId" component={ProductShow}/>
         <Route exact path="/newItems" component={NewItems} />
+        <Route exact path="/cart" component={CartDisplay} />
       </Switch>
     </div>
   );
