@@ -67,26 +67,26 @@ const NavBar = props => {
                   <div className="nav-user-name">
                     <p className="nav-user-only-name">Hello,</p>
                     <div className="row">
-                      <p className="nav-account-header">Sign In</p>
+                      <Link to="/login">
+                        <p className="nav-account-header">Sign In</p>
+                      </Link>
                       <div>
                         <i className="arrow-grey left"></i>
                       </div>
                     </div>
                     <div className="relative-container">
                       <ul className="account-dropdown">
-                        <h1 className="account-dropdown-header">
-                          Sign In
-                        </h1>
+                        <h1 className="account-dropdown-header">Sign In</h1>
                         <li>
-                          <Link to="/register"><div className="register-btn">Register</div></Link>
+                          <Link to="/register">
+                            <div className="register-btn">Register</div>
+                          </Link>
                         </li>
                       </ul>
                     </div>
                   </div>
                   <div className="shopping-cart">
-                    <p className="nav-number-items-in-cart">
-                      0
-                    </p>
+                    <p className="nav-number-items-in-cart">0</p>
                     <span className="cart-icon"></span>
                   </div>
                   <p className="cart-label">Cart</p>

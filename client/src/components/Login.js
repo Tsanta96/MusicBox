@@ -49,7 +49,7 @@ class Login extends Component {
             mutation={LOGIN_USER}
             onCompleted={data => {
                 const { token } = data.login;
-                localStorage.setItem("auth-token", token);
+                // localStorage.setItem("auth-token", token);
                 this.props.history.push("/");
             }}
             onError={({ graphQLErrors }) => {
