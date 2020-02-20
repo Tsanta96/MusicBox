@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { DELETE_FROM_CART } from '../../graphql/mutations';
 import { useMutation } from '@apollo/react-hooks';
 import './cartRow.scss';
@@ -25,7 +26,7 @@ const CartRow = props => {
                 <div className="row">
                     <img className="cart-row-img" src={props.imageUrl} />
                     <div className="prod-title-col">
-                        <p className="cart-row-title">{props.title}</p>
+                        <p className="cart-row-title" onClick={() => props.history.push(`/products/${props.productId}`)}>{props.title}</p>
                         <p className="delete-item" onClick={deleteItemFromCart}>Delete</p>
                     </div>
                 </div>
@@ -38,4 +39,4 @@ const CartRow = props => {
     )
 };
 
-export default CartRow;
+export default withRouter(CartRow);
