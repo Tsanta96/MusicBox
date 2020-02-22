@@ -18,7 +18,6 @@ const SearchIndex = props => {
       variables: { searchText: props.match.params.category }
     })
 
-    console.log("this is data3", data3);
     if (loading1 || loading2 || loading3){
         return (<LoadingIcon />);
     } else if (data1 && data1.categoryByName.length > 0){
