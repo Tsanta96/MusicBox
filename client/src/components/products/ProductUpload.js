@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import uuidv1 from 'uuid/v1';
-import { Query, Mutation, ApolloConsumer } from 'react-apollo';
+import { Query, ApolloConsumer } from 'react-apollo';
 import { CREATE_PRODUCT, CREATE_PHOTO, S3_SIGN } from '../../graphql/mutations';
 import {useQuery, useMutation} from '@apollo/react-hooks';
 import { FETCH_CATEGORIES, FETCH_USER } from '../../graphql/queries';
@@ -23,7 +22,6 @@ function ProductUpload() {
     const stateFields = ["Name", "Category", "Description", "InventoryAmount", "Price", "Weight", "Image", "AWSUrl"];
 
     const [s3Sign, { s3SignData }] = useMutation(S3_SIGN);
-    const [createPhoto, { createPhotoData }] = useMutation(CREATE_PHOTO);
     const [createProduct, { createProductData }] = useMutation(CREATE_PRODUCT);
     const { loading: fetchUserLoading, error: fetchUserError, data: fetchUserData } = useQuery(FETCH_USER);
 
@@ -132,11 +130,6 @@ function ProductUpload() {
         await axios.put(signedRequest, photo, options);
       };
 
-    const uniqueName = () => {
-        const randString = uuidv1();
-        return String(randString);
-    }
-
     const uploadFile = async () => {
         const response = await s3Sign({ 
             variables: {
@@ -146,11 +139,8 @@ function ProductUpload() {
         })
 
         const { signedRequest, url } = response.data.signS3;
-
         setAwsUrl(url);
-
         await uploadToS3(photo, signedRequest);
-
         return setState();
     }
 
