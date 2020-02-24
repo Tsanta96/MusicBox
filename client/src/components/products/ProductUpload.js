@@ -253,7 +253,8 @@ function ProductUpload() {
                                     <div className="right-side-upload-and-upload-button">
                                         <div className="right-side-upload">
                                             <div className="right-side-upload-inner-content">
-                                                <label> Product Image
+                                                {/* Had to change <label> to <div> because <label> propogates to descendant <input>'s causing the file system to open twice */}
+                                                <div> Product Image
                                                 <br></br>
                                                     <div className="dropzone">
                                                         <Dropzone onDrop={onDrop}>
@@ -264,9 +265,9 @@ function ProductUpload() {
                                                                 </div>
                                                             )}
                                                         </Dropzone>
-                                                        {/* <p>{imageUrl}</p> */}
+                                                        <p>{imageUrl}</p>
                                                     </div>
-                                                </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="product-upload-errors-and-upload-button">
