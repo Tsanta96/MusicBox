@@ -122,6 +122,17 @@ function ProductUpload() {
         setImageUrl(files[0].name);
     };
 
+    const renderImgUrl = () => {
+        if (imageUrl) {
+            return (
+                <div>
+                    <p>---------</p>
+                    <p>{imageUrl}</p>
+                </div>
+            )
+        } 
+    }
+
     const uploadToS3 = async (photo, signedRequest) => {
         const options = {
           headers: {
@@ -265,7 +276,7 @@ function ProductUpload() {
                                                                 </div>
                                                             )}
                                                         </Dropzone>
-                                                        <p>{imageUrl}</p>
+                                                        {renderImgUrl()}
                                                     </div>
                                                 </div>
                                             </div>
