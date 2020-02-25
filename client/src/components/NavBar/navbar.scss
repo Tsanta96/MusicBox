@@ -52,10 +52,18 @@
     li {
         font-family: 'Amazon Ember';
     }
-    li:hover {
-        color: rgb(240,136,48);
+    .register-btn:hover {
+        color: rgb(240, 136, 48);
         text-decoration: underline;
     }
+    .signin-btn:hover {
+        color: rgb(240, 136, 48);
+        text-decoration: underline;
+    }
+    // li:hover {
+    //     color: rgb(240,136,48);
+    //     text-decoration: underline;
+    // }
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
