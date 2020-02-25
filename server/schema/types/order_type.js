@@ -20,7 +20,6 @@ const OrderType = new GraphQLObjectType({
     products: {
         type: new GraphQLList(require("./product_type")),
         resolve(parentValue) {{
-          // console.log("parentValue: ", parentValue);
           // return Category.findProducts(parentValue._id)
           return parentValue.products
         }}

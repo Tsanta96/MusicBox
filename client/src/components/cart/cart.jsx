@@ -10,7 +10,6 @@ const Cart = props => {
         const result = products.reduce((acc, currentValue, ) => {
             return acc + currentValue.price
         }, 0);
-        console.log(result);
         return result;
     };
     if (loading) {
@@ -18,7 +17,6 @@ const Cart = props => {
     } else if (error) {
         return <p>Sorry there is an error</p>
     } else if (data.cart){
-        console.log(data);
         return <div className="cart">
             <div className="cart-col">
                 <div className="cart-head-row">

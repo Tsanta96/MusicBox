@@ -9,7 +9,7 @@ const validateLoginInput = require("../validation/login");
 const register = async data => {
     try {
       const { message, isValid } = validateRegisterInput(data);
-  
+      console.log(isValid);
       if (!isValid) {
         throw new Error(JSON.stringify(message));
       }
@@ -29,12 +29,10 @@ const register = async data => {
       );
   
       user.save();
-      console.log("USER", user);
       // we'll create a token for the user
       const token = jwt.sign({ id: user._id }, keys.secretOrKey);
-  
       // then return our created token, set loggedIn to be true, null their password, and send the rest of the user
-      return { token, loggedIn: true, ...user._doc, password: null };
+      return {loggedIn: true, ...user._doc, password: null, token };
     } catch (err) {
         throw err.message;
     }
@@ -98,7 +96,7 @@ const verifyUser = async data => {
       });
 
       const loggedIn = fullUser ? true : false;
-      return { loggedIn, _id: id, name: fullUser.name, email: fullUser.email };
+      return { loggedIn, _id: id, name: fullUser.name, email: fullUser.email, token};
     } catch (err) {
       return { loggedIn: false };
     }

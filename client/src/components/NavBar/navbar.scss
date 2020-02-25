@@ -64,6 +64,11 @@
     //     color: rgb(240,136,48);
     //     text-decoration: underline;
     // }
+
+    li a:hover {
+        color: rgb(240, 136, 48);
+        text-decoration: underline;
+    }
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 

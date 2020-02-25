@@ -7,7 +7,6 @@ import { IS_LOGGED_IN } from '../../graphql/queries';
 const CartRow = props => {
     const [deleteFromCart] = useMutation(DELETE_FROM_CART, {
         update(cache, { data: { deleteFromCart }}){
-            console.log("This is the deletedCart", deleteFromCart);
             cache.writeQuery({
                 query: IS_LOGGED_IN,
                 data: { cart: deleteFromCart }

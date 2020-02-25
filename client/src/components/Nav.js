@@ -10,7 +10,6 @@ const Nav = props => {
       {client => (
         <Query query={IS_LOGGED_IN}>
           {({ data }) => {
-            console.log("nav data: ", data);
             if (data.isLoggedIn) {
               return (
                 <button
