@@ -100,6 +100,15 @@ class Login extends Component {
                         <h5 className="new-to-musicbox-text">New to MusicBox?</h5>
                     </div>
                     <button className="create-your-account-btn" type="submit" onClick={() => this.props.history.push("/register")}>Create your MusicBox account</button>
+                    <button className="demo-user-btn" onClick={e => {
+                        e.preventDefault();
+                        loginUser({
+                            variables: {
+                                email: 'reilly@musicbox.com',
+                                password: 'reilly123'
+                            }
+                        })
+                    }}>Demo User</button>
                 </div>
             </div>
             )}

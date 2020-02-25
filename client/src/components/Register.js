@@ -46,6 +46,10 @@ class Register extends Component {
             )
         }
     }
+
+    demoSignIn() {
+
+    }
     
     render() {
         return (
