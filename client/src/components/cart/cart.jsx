@@ -29,7 +29,9 @@ const Cart = props => {
                     {
                         data.cart.products.map((product, idx )=> (
                             <CartRow
+                            key={idx}
                             cartId={data.cart._id} 
+                            productId={product._id}
                             imageUrl={product.imageUrl}
                             title={product.name}
                             price={product.price}

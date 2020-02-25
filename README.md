@@ -1,5 +1,15 @@
 # Music Box
 
+[Live Demo](https://musicbox-aa.herokuapp.com/#/search/all "Live Demo")
+
+## Technologies and Technical Challenges
+* GQL
+* React/Apollo
+* Node
+* MongoDB
+* AWS
+* Docker
+
 ## Background and Overview
 * Amazon themed music store where customers can purchase music equipment. For this project
 we wanted to create something that would showcase the relational data mapping that graphql 
@@ -18,14 +28,6 @@ as open the door for potential freelance opportunities.
 # Bonus
 * Inventory count for backend
 * Delivery/tracking?
-
-## Technologies and Technical Challenges
-* GQL
-* React/Apollo
-* Node
-* MongoDB
-* AWS
-* Docker
 
 ## Weekend To-Do
 * User auth

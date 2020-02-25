@@ -76,11 +76,20 @@ const NavBar = props => {
                     </div>
                     <div className="relative-container">
                       <ul className="account-dropdown">
+<<<<<<< HEAD
                         <h1 className="account-dropdown-header">Sign In</h1>
                         <li>
                           <Link to="/register">
                             <div className="register-btn">Register</div>
                           </Link>
+=======
+                        <h1 className="account-dropdown-header">
+                          Welcome
+                        </h1>
+                        <li>
+                          <Link to="/login"><div className="signin-btn">Sign In</div></Link>
+                          <Link to="/register"><div className="register-btn">Register</div></Link>
+>>>>>>> master
                         </li>
                       </ul>
                     </div>

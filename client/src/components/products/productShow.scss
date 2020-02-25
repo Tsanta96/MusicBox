@@ -8,7 +8,7 @@
     height: 25px;
     width: 25px;
     position: absolute;
-    left: 2px;
+    left: 5px;
     top: 6px;
 }
 
@@ -23,6 +23,7 @@
     font-family: 'Amazon Ember';
     padding: 8px 60px;
     margin-bottom: 2em;
+    white-space: nowrap;
 }
 
 .buy-btn {
@@ -35,6 +36,7 @@ padding: 8px 70px;
 box-sizing: border-box;
 border: 1px solid rgb(168, 135, 52);
 position: relative;
+white-space: nowrap;
 }
 
 .icon-btn {
@@ -51,7 +53,7 @@ position: relative;
     background-size: 400px 900px;
     vertical-align: top;
     position: absolute;
-    left: 2px;
+    left: 5px;
     top: 6px;
 }
 
