@@ -13,6 +13,16 @@ const Cart = props => {
         console.log(result);
         return result;
     };
+    const handleProceedToCheckout= () => {
+        let buyNowWarning = document.getElementById('buy-now-warning');
+        buyNowWarning.classList.remove('warning-hidden');
+        buyNowWarning.classList.add('checkout-not-functional-warning');
+    }
+    const closeWarning = () => {
+        let buyNowWarning = document.getElementById('buy-now-warning');
+        buyNowWarning.classList.remove('checkout-not-functional-warning');
+        buyNowWarning.classList.add('warning-hidden');
+    }
     if (loading) {
         return <p>loading...</p>
     } else if (error) {
@@ -51,16 +61,24 @@ const Cart = props => {
             </div>
             <div className="cart-subtotal-col">
                 <div className="sub-cart-row">
-                   <p className="subtotal-blk">
+                    <p className="subtotal-blk">
                         {`Subtotal (${data.cart.products.length} items):`}
-                   </p>
-                   <p className="price-red-new">
+                    </p>
+                    <p className="price-red-new">
                         {`$${cartSum(data.cart.products).toFixed(2)}`}
-                   </p>
+                    </p>
+                    <div id="buy-now-warning" className="warning-hidden">
+                        <p>In Progress</p>
+                        <span className="close-warning" onClick={closeWarning}>x</span>
+                    </div>
             </div>
-            <button className="cart-proceed-btn">
+            <button className="cart-proceed-btn" onClick={handleProceedToCheckout}>
                 Proceed to checkout
             </button>
+                {/* <div id="buy-now-warning" className="warning-hidden">
+                    <p>In Progress</p>
+                    <span className="close-warning" onClick={closeWarning}>x</span>
+                </div> */}
             </div>
         </div>
     } else {

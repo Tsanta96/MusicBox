@@ -43,6 +43,7 @@
 }
 
 .sub-cart-row {
+    position: relative;
     display: flex;
     margin-bottom: 3em;
 }
@@ -59,4 +60,22 @@
     border: 1px solid rgb(168,135,52);
     font-size: 16px;
     text-align: center;
+    white-space: nowrap;
+    // width: 185px;
+}
+
+// For in progress popup when clicking "Proceed to Checkout"
+
+.checkout-not-functional-warning {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    left: 110px;
+    top: 120px;
+    background-color: white;
+    width: 130px;
+    text-align: center;
+    border: 1px solid darkgrey;
+    box-shadow: 5px 5px 10px grey;
+    padding: 10px 0px 10px 10px;
 }

@@ -19,10 +19,36 @@ const ProductShow = props => {
       })
     }
   });
+
   const handleAddToCart = () => {
-    addToCart({ variables: { productId: props.match.params.productId, cartId: isLoggedIn.cart._id }})
-    .then(() => props.history.push("/newItems")).catch(e => console.log(e));
+    if (isLoggedIn.isLoggedIn) {
+      addToCart({ variables: { productId: props.match.params.productId, cartId: isLoggedIn.cart._id }})
+      .then(() => props.history.push("/newItems")).catch(e => console.log(e));
+    } else {
+      props.history.push('/login');
+    }
   }
+
+  const handleBuyNow = () => {
+    if (isLoggedIn.isLoggedIn) {
+      let buyNowWarning = document.getElementById('buy-now-warning');
+      buyNowWarning.classList.remove('warning-hidden');
+      buyNowWarning.classList.add('not-functional-warning');
+    } else {
+      props.history.push('/login');
+    }
+  }
+
+  const ifLoggedIn = () => {
+    console.log("isLoggedIn?", isLoggedIn.isLoggedIn);
+  }
+
+  const closeWarning = () => {
+    let buyNowWarning = document.getElementById('buy-now-warning');
+    buyNowWarning.classList.remove('not-functional-warning');
+    buyNowWarning.classList.add('warning-hidden');
+  }
+
     if (showLoading || loggedInLoading){
         return <LoadingIcon />
     } else if (showError){
@@ -31,6 +57,7 @@ const ProductShow = props => {
         const { product } = showData;
         return (
           <div className="product-show">
+            {ifLoggedIn()}
             <img
               className="full-prod-img"
               src={product.imageUrl}
@@ -64,8 +91,12 @@ const ProductShow = props => {
               </div>
 
               <div className="icon-btn">
-                <button className="buy-btn">Buy Now</button>
+                <button className="buy-btn" onClick={handleBuyNow}>Buy Now</button>
                 <div className="buy-icon"></div>
+                <div id="buy-now-warning" className="warning-hidden">
+                  <p>In Progress</p>
+                  <span className="close-warning" onClick={closeWarning}>x</span>
+                </div>
               </div>
             </div>
           </div>
