@@ -75,9 +75,10 @@ const NavBar = props => {
                     <div className="relative-container">
                       <ul className="account-dropdown">
                         <h1 className="account-dropdown-header">
-                          Sign In
+                          Welcome
                         </h1>
                         <li>
+                          <Link to="/login"><div className="signin-btn">Sign In</div></Link>
                           <Link to="/register"><div className="register-btn">Register</div></Link>
                         </li>
                       </ul>
