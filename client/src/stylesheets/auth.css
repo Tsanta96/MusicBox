@@ -217,3 +217,32 @@
     cursor: pointer;
     text-align: center;
 }
+
+.demo-user-btn {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #2c4366;
+    color: white;
+    font-family: "Amazon Ember", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.demo-user-btn:hover {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #2c4366;
+    color: orange;
+    font-family: "Amazon Ember", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    cursor: pointer;
+}

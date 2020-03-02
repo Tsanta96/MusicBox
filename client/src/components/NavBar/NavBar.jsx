@@ -16,7 +16,9 @@ const NavBar = props => {
             if (data.isLoggedIn) {
               return (
                 <div className="navbar">
-                  <h1 className="white" onClick={() => props.history.push("/")}>musicbox</h1>
+                  <h1 className="white" onClick={() => props.history.push("/")}>
+                    musicbox
+                  </h1>
                   <SearchBar />
                   <div className="nav-user-name">
                     <p className="nav-user-only-name">{`Hello, ${data.name}`}</p>
@@ -32,7 +34,9 @@ const NavBar = props => {
                           Your Account
                         </h1>
                         <li>
-                          <Link to="#">Your Orders</Link>
+                          <Link to="#">
+                            <span className="signin-btn">Your Orders</span>
+                          </Link>
                         </li>
                         <li>
                           <Link to="/upload">List a Product</Link>
@@ -52,8 +56,13 @@ const NavBar = props => {
                       </ul>
                     </div>
                   </div>
-                  <div className="shopping-cart" onClick={() => props.history.push("/cart")}>
-                    <p className="nav-number-items-in-cart">{data.cart ? data.cart.products.length.toString() : "0"}</p>
+                  <div
+                    className="shopping-cart"
+                    onClick={() => props.history.push("/cart")}
+                  >
+                    <p className="nav-number-items-in-cart">
+                      {data.cart ? data.cart.products.length.toString() : "0"}
+                    </p>
                     <span className="cart-icon"></span>
                   </div>
                   <p className="cart-label">Cart</p>
@@ -67,7 +76,9 @@ const NavBar = props => {
                   <div className="nav-user-name">
                     <p className="nav-user-only-name">Hello,</p>
                     <div className="row">
-                      <p className="nav-account-header">Sign In</p>
+                      <Link to="/login">
+                        <p className="nav-account-header">Sign In</p>
+                      </Link>
                       <div>
                         <i className="arrow-grey left"></i>
                       </div>
@@ -75,18 +86,17 @@ const NavBar = props => {
                     <div className="relative-container">
                       <ul className="account-dropdown">
                         <h1 className="account-dropdown-header">
-                          Sign In
+                          Welcome
                         </h1>
                         <li>
+                          <Link to="/login"><div className="signin-btn">Sign In</div></Link>
                           <Link to="/register"><div className="register-btn">Register</div></Link>
                         </li>
                       </ul>
                     </div>
                   </div>
                   <div className="shopping-cart">
-                    <p className="nav-number-items-in-cart">
-                      0
-                    </p>
+                    <p className="nav-number-items-in-cart">0</p>
                     <span className="cart-icon"></span>
                   </div>
                   <p className="cart-label">Cart</p>

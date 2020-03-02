@@ -17,8 +17,19 @@ const cache = new InMemoryCache({
     dataIdFromObject: object => object._id || null
 });
 
+let uri;
+
+if (process.env.NODE_ENV === "production") {
+  uri = `/graphql`;
+} else {
+  uri = "http://localhost:5000/graphql";
+}
+
 const httpLink = createHttpLink({
-    uri: "http://localhost:5000/graphql"
+  uri,
+  headers: {
+    authorization: localStorage.getItem("auth-token")
+  }
 });
 
 const errorLink = onError(({ graphQLErrors }) => {
@@ -52,6 +63,8 @@ if (token) {
     // user is loggedIn
     .mutate({ mutation: VERIFY_USER, variables: { token } })
     .then(({ data }) => {
+      // console.log("Data", data);
+      // localStorage.setItem("auth-token", data.verifyUser.token);
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
