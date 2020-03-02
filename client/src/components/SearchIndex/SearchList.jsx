@@ -7,13 +7,18 @@ const SearchList = props => {
         <div className="search-list">
             {
                 products.map(product => 
-                <ProductThumbail 
-                imageUrl={product.imageUrl ? product.imageUrl : ""}
-                name={product.name.length > 150 ? product.name.split(0,147) + "..." : product.name}
-                price={product.price.toString()}
-                id={product._id}
-                key={product._id}
-                />)
+                    {
+                        let name = product.name.length > 150 ? product.name.slice(0,138) + "..." : product.name;
+                        console.log(name);
+                        return <ProductThumbail 
+                            imageUrl={product.imageUrl ? product.imageUrl : ""}
+                            name={name}
+                            price={product.price.toString()}
+                            id={product._id}
+                            key={product._id}
+                        />
+                    }
+                )
             }
         </div>
     )
