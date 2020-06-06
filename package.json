@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/Tsanta96/MusicBox#readme",
   "dependencies": {
-    "apollo-server": "^2.9.16",
+    "apollo-server": "^2.14.2",
     "aws-sdk": "^2.610.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
