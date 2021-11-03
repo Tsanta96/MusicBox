@@ -41,6 +41,6 @@
     "react-dropzone": "^10.2.1",
     "react-router-dom": "^5.1.2",
     "uuid": "^3.4.0",
-    "validator": "^12.1.0"
+    "validator": "^13.7.0"
   }
 }
